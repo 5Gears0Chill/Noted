@@ -5,21 +5,21 @@ import androidx.room.Junction;
 import androidx.room.Relation;
 
 import com.fivegearszerochill.noted.room.entity.NoteEntity;
-import com.fivegearszerochill.noted.room.entity.NoteTagCrossReference;
+import com.fivegearszerochill.noted.room.entity.NoteTagCrossReferenceEntity;
 import com.fivegearszerochill.noted.room.entity.TagEntity;
 
 import java.util.List;
 
-public class TagWithNotesEntity {
+public class TagWithNotes {
     @Embedded
     private TagEntity tag;
 
     @Relation(parentColumn = "tag_id",
             entityColumn = "note_id",
-            associateBy = @Junction(NoteTagCrossReference.class))
+            associateBy = @Junction(NoteTagCrossReferenceEntity.class))
     private List<NoteEntity> notes;
 
-    public TagWithNotesEntity(TagEntity tag, List<NoteEntity> notes) {
+    public TagWithNotes(TagEntity tag, List<NoteEntity> notes) {
         this.tag = tag;
         this.notes = notes;
     }

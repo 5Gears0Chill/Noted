@@ -17,9 +17,13 @@ public class NotebookEntity {
     @ColumnInfo(name = "description")
     private String description;
 
-    public NotebookEntity(String title, String description) {
+    @ColumnInfo(name = "tag_id")
+    private int tagId;
+
+    public NotebookEntity(String title, String description, int tagId) {
         this.title = title;
         this.description = description;
+        this.tagId = tagId;
     }
 
     public void setNotebookId(int notebookId) {
@@ -36,5 +40,9 @@ public class NotebookEntity {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getTagId() {
+        return tagId;
     }
 }

@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 
 @Entity(tableName = "note_tag_cross_ref", primaryKeys = {"tag_id", "note_id"})
-public class NoteTagCrossReference {
+public class NoteTagCrossReferenceEntity {
 
     @ColumnInfo(name = "tag_id")
     private int tagId;
