@@ -17,10 +17,10 @@ public class NoteAttributeEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "note_attribute_id")
-    private int noteAttributeId;
+    private long noteAttributeId;
 
     @ColumnInfo(name = "note_id")
-    private int noteId;
+    private long noteId;
 
     @ColumnInfo(name = "created_on")
     private Date createdOn;
@@ -29,28 +29,25 @@ public class NoteAttributeEntity {
     private Date updatedOn;
 
     @ColumnInfo(name = "category_id")
-    private int categoryId;
+    private long categoryId;
 
-    @ColumnInfo(name = "file_size")
-    private int fileSize;
 
-    public NoteAttributeEntity(int noteId, Date createdOn, Date updatedOn, int categoryId, int fileSize) {
+    public NoteAttributeEntity(long noteId, Date createdOn, Date updatedOn, long categoryId) {
         this.noteId = noteId;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
         this.categoryId = categoryId;
-        this.fileSize = fileSize;
     }
 
     public void setNoteAttributeId(int noteAttributeId) {
         this.noteAttributeId = noteAttributeId;
     }
 
-    public int getNoteAttributeId() {
+    public long getNoteAttributeId() {
         return noteAttributeId;
     }
 
-    public int getNoteId() {
+    public long getNoteId() {
         return noteId;
     }
 
@@ -62,11 +59,7 @@ public class NoteAttributeEntity {
         return updatedOn;
     }
 
-    public int getCategoryId() {
+    public long getCategoryId() {
         return categoryId;
-    }
-
-    public int getFileSize() {
-        return fileSize;
     }
 }

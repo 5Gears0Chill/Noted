@@ -9,7 +9,7 @@ public class TagEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "tag_id")
-    private int tagId;
+    private long tagId;
 
     @ColumnInfo(name = "description")
     private String description;
@@ -22,11 +22,11 @@ public class TagEntity {
         this.isActive = isActive;
     }
 
-    public void setTagId(int tagId) {
+    public void setTagId(long tagId) {
         this.tagId = tagId;
     }
 
-    public int getTagId() {
+    public long getTagId() {
         return tagId;
     }
 

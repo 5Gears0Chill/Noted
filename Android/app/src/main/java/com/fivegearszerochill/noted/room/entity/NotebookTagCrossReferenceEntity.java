@@ -7,24 +7,24 @@ import androidx.room.Entity;
 public class NotebookTagCrossReferenceEntity {
 
     @ColumnInfo(name = "tag_id")
-    private int tagId;
+    private long tagId;
 
     @ColumnInfo(name = "notebook_id")
-    private int noteId;
+    private long noteId;
 
-    public int getTagId() {
+    public long getTagId() {
         return tagId;
     }
 
-    public void setTagId(int tagId) {
+    public void setTagId(long tagId) {
         this.tagId = tagId;
     }
 
-    public int getNoteId() {
+    public long getNoteId() {
         return noteId;
     }
 
-    public void setNoteId(int noteId) {
+    public void setNoteId(long noteId) {
         this.noteId = noteId;
     }
 }

@@ -18,10 +18,10 @@ public class NoteResourceEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "resource_id")
-    private int resourceId;
+    private long resourceId;
 
     @ColumnInfo(name = "note_id")
-    private int noteId;
+    private long noteId;
 
     @ColumnInfo(name = "title")
     private String title;
@@ -30,28 +30,24 @@ public class NoteResourceEntity {
     private String content;
 
     @ColumnInfo(name = "type_id")
-    private int typeId;
+    private long typeId;
 
-    @ColumnInfo(name = "is_active")
-    private boolean isActive;
-
-    public NoteResourceEntity(int noteId, String title, String content, int typeId, boolean isActive) {
+    public NoteResourceEntity(long noteId, String title, String content, long typeId) {
         this.noteId = noteId;
         this.title = title;
         this.content = content;
         this.typeId = typeId;
-        this.isActive = isActive;
     }
 
     public void setResourceId(int resourceId) {
         this.resourceId = resourceId;
     }
 
-    public int getResourceId() {
+    public long getResourceId() {
         return resourceId;
     }
 
-    public int getNoteId() {
+    public long getNoteId() {
         return noteId;
     }
 
@@ -63,11 +59,7 @@ public class NoteResourceEntity {
         return content;
     }
 
-    public int getTypeId() {
+    public long getTypeId() {
         return typeId;
-    }
-
-    public boolean isActive() {
-        return isActive;
     }
 }

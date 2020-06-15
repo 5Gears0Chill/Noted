@@ -6,6 +6,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.fivegearszerochill.noted.room.dao.NoteDao;
+import com.fivegearszerochill.noted.room.dao.NotebookDao;
+import com.fivegearszerochill.noted.room.dao.TagDao;
 import com.fivegearszerochill.noted.room.entity.NoteAttributeEntity;
 import com.fivegearszerochill.noted.room.entity.NoteCategoryEntity;
 import com.fivegearszerochill.noted.room.entity.NoteEntity;
@@ -43,5 +46,12 @@ public abstract class NotedDatabase extends RoomDatabase {
         }
         return instance;
     }
+
+    public abstract NoteDao getNoteDao();
+
+    public abstract NotebookDao getNoteBookDao();
+
+    public abstract TagDao getTagDao();
+
 
 }

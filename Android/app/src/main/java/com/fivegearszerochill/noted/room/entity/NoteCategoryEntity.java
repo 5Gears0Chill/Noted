@@ -9,7 +9,7 @@ public class NoteCategoryEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "category_id")
-    private int categoryId;
+    private long categoryId;
 
     @ColumnInfo(name = "description")
     private String description;
@@ -26,7 +26,7 @@ public class NoteCategoryEntity {
         this.categoryId = categoryId;
     }
 
-    public int getCategoryId() {
+    public long getCategoryId() {
         return categoryId;
     }
 

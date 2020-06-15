@@ -9,7 +9,7 @@ public class NotebookEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "notebook_id")
-    private int notebookId;
+    private long notebookId;
 
     @ColumnInfo(name = "title")
     private String title;
@@ -18,19 +18,19 @@ public class NotebookEntity {
     private String description;
 
     @ColumnInfo(name = "tag_id")
-    private int tagId;
+    private long tagId;
 
-    public NotebookEntity(String title, String description, int tagId) {
+    public NotebookEntity(String title, String description, long tagId) {
         this.title = title;
         this.description = description;
         this.tagId = tagId;
     }
 
-    public void setNotebookId(int notebookId) {
+    public void setNotebookId(long notebookId) {
         this.notebookId = notebookId;
     }
 
-    public int getNotebookId() {
+    public long getNotebookId() {
         return notebookId;
     }
 
@@ -42,7 +42,7 @@ public class NotebookEntity {
         return description;
     }
 
-    public int getTagId() {
+    public long getTagId() {
         return tagId;
     }
 }

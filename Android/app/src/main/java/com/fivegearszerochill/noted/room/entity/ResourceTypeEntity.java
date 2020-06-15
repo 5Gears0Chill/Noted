@@ -9,7 +9,7 @@ public class ResourceTypeEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "type_id")
-    private int typeId;
+    private long typeId;
 
     @ColumnInfo(name = "description")
     private String description;
@@ -22,11 +22,11 @@ public class ResourceTypeEntity {
         this.isActive = isActive;
     }
 
-    public void setTypeId(int typeId) {
+    public void setTypeId(long typeId) {
         this.typeId = typeId;
     }
 
-    public int getTypeId() {
+    public long getTypeId() {
         return typeId;
     }
 

@@ -14,10 +14,10 @@ public class NoteEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "note_id")
-    private int noteId;
+    private long noteId;
 
     @ColumnInfo(name = "notebook_id")
-    private int notebookId;
+    private long notebookId;
 
     @ColumnInfo(name = "title")
     private String title;
@@ -25,25 +25,21 @@ public class NoteEntity {
     @ColumnInfo(name = "content")
     private String content;
 
-    @ColumnInfo(name = "is_active")
-    private boolean isActive;
-
-    public NoteEntity(int notebookId, String title, String content, boolean isActive) {
+    public NoteEntity(long notebookId, String title, String content) {
         this.notebookId = notebookId;
         this.title = title;
         this.content = content;
-        this.isActive = isActive;
     }
 
-    public void setNoteId(int noteId) {
+    public void setNoteId(long noteId) {
         this.noteId = noteId;
     }
 
-    public int getNoteId() {
+    public long getNoteId() {
         return noteId;
     }
 
-    public int getNotebookId() {
+    public long getNotebookId() {
         return notebookId;
     }
 
@@ -53,9 +49,5 @@ public class NoteEntity {
 
     public String getContent() {
         return content;
-    }
-
-    public boolean isActive() {
-        return isActive;
     }
 }
