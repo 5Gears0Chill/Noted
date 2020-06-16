@@ -3,6 +3,7 @@ package com.fivegearszerochill.noted.room.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.Relation;
 
@@ -12,7 +13,8 @@ import java.util.Date;
         foreignKeys = @ForeignKey(entity = NoteCategoryEntity.class,
                 parentColumns = "category_id",
                 childColumns = "category_id",
-                onDelete = ForeignKey.CASCADE))
+                onDelete = ForeignKey.CASCADE),
+        indices = {@Index(value = "category_id")})
 public class NoteAttributeEntity implements CoreEntity {
 
     @PrimaryKey(autoGenerate = true)
@@ -39,7 +41,7 @@ public class NoteAttributeEntity implements CoreEntity {
         this.categoryId = categoryId;
     }
 
-    public void setNoteAttributeId(int noteAttributeId) {
+    public void setNoteAttributeId(long noteAttributeId) {
         this.noteAttributeId = noteAttributeId;
     }
 

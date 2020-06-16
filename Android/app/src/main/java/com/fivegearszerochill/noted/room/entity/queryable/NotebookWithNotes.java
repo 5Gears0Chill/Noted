@@ -20,4 +20,17 @@ public class NotebookWithNotes {
             entityColumn = "notebook_id"
     )
     private List<NoteEntity> notes;
+
+    public NotebookWithNotes(NotebookEntity notebook, List<NoteEntity> notes) {
+        this.notebook = notebook;
+        this.notes = notes;
+    }
+
+    public NotebookEntity getNotebook() {
+        return notebook;
+    }
+
+    public List<NoteEntity> getNotes() {
+        return notes;
+    }
 }

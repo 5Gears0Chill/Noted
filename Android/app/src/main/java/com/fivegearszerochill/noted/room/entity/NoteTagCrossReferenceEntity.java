@@ -2,8 +2,11 @@ package com.fivegearszerochill.noted.room.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 
-@Entity(tableName = "note_tag_cross_ref", primaryKeys = {"tag_id", "note_id"})
+@Entity(tableName = "note_tag_cross_ref",
+        primaryKeys = {"tag_id", "note_id"},
+        indices = @Index(value = "note_id"))
 public class NoteTagCrossReferenceEntity implements CoreEntity {
 
     @ColumnInfo(name = "tag_id")

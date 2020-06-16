@@ -4,12 +4,14 @@ import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "note",
         foreignKeys = @ForeignKey(entity = NotebookEntity.class,
                 parentColumns = "notebook_id",
-                childColumns = "notebook_id"))
+                childColumns = "notebook_id"),
+        indices = {@Index(value = "notebook_id")})
 public class NoteEntity implements CoreEntity {
 
     @PrimaryKey(autoGenerate = true)

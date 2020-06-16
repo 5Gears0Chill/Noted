@@ -3,6 +3,7 @@ package com.fivegearszerochill.noted.room.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "note_resource",
@@ -13,7 +14,7 @@ import androidx.room.PrimaryKey;
                 @ForeignKey(entity = NoteEntity.class,
                         parentColumns = "note_id",
                         childColumns = "note_id")
-        })
+        }, indices = {@Index(value = "type_id"), @Index(value = "note_id")})
 public class NoteResourceEntity implements CoreEntity {
 
     @PrimaryKey(autoGenerate = true)
@@ -39,7 +40,7 @@ public class NoteResourceEntity implements CoreEntity {
         this.typeId = typeId;
     }
 
-    public void setResourceId(int resourceId) {
+    public void setResourceId(long resourceId) {
         this.resourceId = resourceId;
     }
 

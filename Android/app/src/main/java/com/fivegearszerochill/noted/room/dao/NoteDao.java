@@ -47,14 +47,15 @@ public abstract class NoteDao implements CoreDao {
     )
     abstract NoteWithTagsAndResources getNotesWithTagsAndResources(int noteId);
 
-    @Transaction
-    @Query(
-            "SELECT * FROM note " +
-                    "INNER JOIN note_attribute " +
-                    "ON note.note_id = note_attribute.note_id " +
-                    "ORDER BY created_on"
-    )
-    abstract DataSource.Factory<Integer, NoteAndAttributes> getPaginatedNotesAndAttributes();
+//    @Transaction
+//    @Query(
+//            "SELECT note.note_id, notebook_id, title,content, note_attribute.created_on,updated_on, category_id  " +
+//                    "FROM note " +
+//                    "INNER JOIN note_attribute " +
+//                    "ON note.note_id = note_attribute.note_id " +
+//                    "ORDER BY created_on"
+//    )
+//    public abstract DataSource.Factory<Integer, NoteAndAttributes> getPaginatedNotesAndAttributes();
 
     @Insert
     abstract long createNote(NoteEntity note);
