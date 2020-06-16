@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
+import com.fivegearszerochill.noted.room.entity.CoreEntity;
 import com.fivegearszerochill.noted.room.entity.NoteTagCrossReferenceEntity;
 import com.fivegearszerochill.noted.room.entity.TagEntity;
 import com.fivegearszerochill.noted.room.entity.queryable.TagWithNotes;
@@ -13,7 +14,7 @@ import com.fivegearszerochill.noted.room.entity.queryable.TagWithNotes;
 import java.util.List;
 
 @Dao
-public abstract class TagDao {
+public abstract class TagDao implements CoreDao {
 
     @Transaction
     @Query("SELECT * FROM tags WHERE tag_id =:tagId")
@@ -33,5 +34,10 @@ public abstract class TagDao {
     public void addNonExistentTagFromNote(int noteId, TagEntity tag){
         long tagId = createNewTag(tag);
         createCrossRef(new NoteTagCrossReferenceEntity(noteId, tagId));
+    }
+
+    @Override
+    public long insertAsync(CoreEntity entity) {
+        return createNewTag((TagEntity) entity);
     }
 }

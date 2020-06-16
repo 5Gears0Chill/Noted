@@ -10,23 +10,19 @@ import androidx.paging.PagedList;
 import com.fivegearszerochill.noted.room.dao.NotebookDao;
 import com.fivegearszerochill.noted.room.database.NotedDatabase;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
+import com.fivegearszerochill.noted.util.mutithreading.BackgroundTask;
+import com.fivegearszerochill.noted.util.mutithreading.TaskRunner;
 import com.fivegearszerochill.noted.util.repository.ExecutorHelper;
 import com.fivegearszerochill.noted.util.repository.PagingHelper;
-import com.fivegearszerochill.noted.util.repository.TaskHelper;
-
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 
 public class NotebookRepository {
     private NotebookDao notebookDao;
-    private ExecutorService executor;
+    private TaskRunner taskRunner;
 
     public NotebookRepository(Application application) {
         NotedDatabase database = NotedDatabase.getInstance(application);
         notebookDao = database.getNoteBookDao();
-        executor = ExecutorHelper.getSingleThreadExecutorInstance();
+        taskRunner = new TaskRunner();
     }
 
     public LiveData<PagedList<NotebookEntity>> getPaginatedNotesAsync() {
@@ -39,17 +35,13 @@ public class NotebookRepository {
                 .build();
     }
 
-    public boolean insertNewNotebook(final NotebookEntity notebook) throws ExecutionException, InterruptedException {
-        Future<Long> task = executor.submit(new Callable<Long>() {
-            @Override
-            public Long call() {
-                return notebookDao.addNewNoteBook(notebook);
+    public void insertNewNotebook(final NotebookEntity notebook) {
+        taskRunner.executeAsync(new BackgroundTask(notebookDao, notebook), (data) -> {
+            if (data != null) {
+                //notify UI SUCCESS
             }
+            //notify UI Failure
         });
-        if(task.isDone() && task.get()!= null){
-            return TaskHelper.SUCCESS;
-        }
-        return TaskHelper.FAILURE;
     }
 
 

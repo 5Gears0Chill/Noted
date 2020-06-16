@@ -2,12 +2,12 @@ package com.fivegearszerochill.noted.room.dao;
 
 import androidx.paging.DataSource;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
+import com.fivegearszerochill.noted.room.entity.CoreEntity;
 import com.fivegearszerochill.noted.room.entity.NoteAttributeEntity;
 import com.fivegearszerochill.noted.room.entity.NoteEntity;
 import com.fivegearszerochill.noted.room.entity.queryable.NoteAndAttributes;
@@ -17,7 +17,7 @@ import com.fivegearszerochill.noted.room.entity.queryable.NoteWithTagsAndResourc
 import com.fivegearszerochill.noted.util.room.NoteAttributeHelper;
 
 @Dao
-public abstract class NoteDao {
+public abstract class NoteDao implements CoreDao {
 
     @Transaction
     @Query(
@@ -60,11 +60,12 @@ public abstract class NoteDao {
     abstract long createNote(NoteEntity note);
 
     @Insert
-    abstract long createNoteAttribute(NoteAttributeEntity noteAttribute);
+    abstract void createNoteAttribute(NoteAttributeEntity noteAttribute);
 
     @Transaction
-    public void createGenericNote(NoteEntity note) {
-        long noteId = createNote(note);
+    @Override
+    public long insertAsync(CoreEntity entity) {
+        long noteId = createNote((NoteEntity) entity);
 
         NoteAttributeEntity attribute = new NoteAttributeEntity(
                 noteId,
@@ -74,6 +75,8 @@ public abstract class NoteDao {
         );
 
         createNoteAttribute(attribute);
+
+        return noteId;
     }
 
     @Update

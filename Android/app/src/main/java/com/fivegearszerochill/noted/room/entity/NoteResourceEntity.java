@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey;
                         parentColumns = "note_id",
                         childColumns = "note_id")
         })
-public class NoteResourceEntity {
+public class NoteResourceEntity implements CoreEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "resource_id")

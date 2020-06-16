@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "resource_type")
-public class ResourceTypeEntity {
+public class ResourceTypeEntity implements CoreEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "type_id")

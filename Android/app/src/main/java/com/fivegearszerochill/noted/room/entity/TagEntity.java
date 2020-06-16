@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tags")
-public class TagEntity {
+public class TagEntity implements CoreEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "tag_id")

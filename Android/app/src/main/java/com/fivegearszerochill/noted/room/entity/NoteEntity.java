@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
         foreignKeys = @ForeignKey(entity = NotebookEntity.class,
                 parentColumns = "notebook_id",
                 childColumns = "notebook_id"))
-public class NoteEntity {
+public class NoteEntity implements CoreEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "note_id")

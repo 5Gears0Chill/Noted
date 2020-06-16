@@ -13,7 +13,7 @@ import java.util.Date;
                 parentColumns = "category_id",
                 childColumns = "category_id",
                 onDelete = ForeignKey.CASCADE))
-public class NoteAttributeEntity {
+public class NoteAttributeEntity implements CoreEntity {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "note_attribute_id")

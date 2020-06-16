@@ -6,13 +6,12 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
+import com.fivegearszerochill.noted.room.entity.CoreEntity;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
 import com.fivegearszerochill.noted.room.entity.queryable.NotebookWithNotes;
 
-import java.util.List;
-
 @Dao
-public abstract class NotebookDao {
+public abstract class NotebookDao implements CoreDao {
 
     @Transaction
     @Query("SELECT * " +
@@ -26,5 +25,11 @@ public abstract class NotebookDao {
 
     @Insert
     public abstract long addNewNoteBook(NotebookEntity notebook);
+
+    @Override
+    public long insertAsync(CoreEntity entity) {
+        return addNewNoteBook((NotebookEntity) entity);
+    }
+
 
 }
