@@ -68,7 +68,6 @@ public abstract class NotedDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             new PopulateAsync(instance).execute();
-
         }
     };
 
