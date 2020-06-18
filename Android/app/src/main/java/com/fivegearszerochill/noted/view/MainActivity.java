@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -63,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
             public void onBookmarkBackItemClicked(View currentView, View oldView) {
                 flip(oldView, currentView);
             }
+        });
+
+
+        binding.fab.setOnClickListener(view -> {
+            Intent intent = new Intent(this, CreateNotebookActivity.class);
+            startActivity(intent);
         });
     }
 

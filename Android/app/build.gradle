@@ -72,4 +72,7 @@ dependencies {
     //Floating action button
     implementation 'com.github.clans:fab:1.6.4'
 
+    //Vertical Stepper
+    implementation 'com.ernestoyaquello.stepperform:vertical-stepper-form:2.2.3'
+
 }
