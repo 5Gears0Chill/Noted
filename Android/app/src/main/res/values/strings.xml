@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Noted</string>
+    <string name="bookmark_icon">bookmark icon</string>
+    <string name="gradient_effect">gradient_effect</string>
+
+    <!--Text Sizes-->
+    <dimen name="text_xl">32sp</dimen>
+    <dimen name="text_l">24sp</dimen>
+    <dimen name="text_n">18sp</dimen>
+    <dimen name="text_s">12sp</dimen>
+
 </resources>

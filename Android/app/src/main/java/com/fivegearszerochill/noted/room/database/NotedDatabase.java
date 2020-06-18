@@ -79,10 +79,10 @@ public abstract class NotedDatabase extends RoomDatabase {
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            notebookDao.addNewNoteBook(PrepopulateHelper.createNotebook("Test 1", "Testing Description", 0));
-            notebookDao.addNewNoteBook(PrepopulateHelper.createNotebook("Test 2", "Testing Description", 0));
-            notebookDao.addNewNoteBook(PrepopulateHelper.createNotebook("Test 3", "Testing Description", 0));
-            notebookDao.addNewNoteBook(PrepopulateHelper.createNotebook("Test 4", "Testing Description", 0));
+            notebookDao.addNewNoteBook(PrepopulateHelper.createNotebook("Test 1", "Testing Description 1", 0));
+            notebookDao.addNewNoteBook(PrepopulateHelper.createNotebook("Test 2", "Testing Description 2", 0));
+            notebookDao.addNewNoteBook(PrepopulateHelper.createNotebook("Test 3", "Testing Description 3", 0));
+            notebookDao.addNewNoteBook(PrepopulateHelper.createNotebook("Test 4", "Testing Description 4", 0));
             return null;
         }
     }
