@@ -6,8 +6,7 @@ import android.os.Build;
 
 import androidx.annotation.NonNull;
 
-import com.fivegearszerochill.noted.view.CrashActivity;
-import com.fivegearszerochill.noted.view.MainActivity;
+import com.fivegearszerochill.noted.view.activities.CrashActivity;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

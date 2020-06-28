@@ -1,4 +1,4 @@
-package com.fivegearszerochill.noted.view;
+package com.fivegearszerochill.noted.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,14 +1,11 @@
-package com.fivegearszerochill.noted.view.recyclerview;
+package com.fivegearszerochill.noted.view.adapters;
 
 import android.content.Context;
-import android.nfc.Tag;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
-import androidx.recyclerview.widget.DiffUtil;
 
 import com.fivegearszerochill.noted.databinding.NotebookCardBinding;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
@@ -32,7 +29,6 @@ public class NotebookFeed extends PagedListAdapter<NotebookEntity, NotebookFeedV
     @NonNull
     @Override
     public NotebookFeedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("Adapter", "MADE IT");
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         NotebookCardBinding binding = NotebookCardBinding.inflate(layoutInflater,parent,false);
         return new NotebookFeedViewHolder(binding, mListener);

@@ -1,8 +1,5 @@
 package com.fivegearszerochill.noted.viewmodel.factory;
 
-import android.util.Log;
-
-import androidx.activity.ComponentActivity;
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -40,7 +37,7 @@ public class ViewModelParameterizedProvider {
     }
 
     @MainThread
-    public static ViewModelProvider ofFragment(android.app.Fragment fragment, Object... params) {
+    public static ViewModelProvider ofFragment(androidx.fragment.app.Fragment fragment, Object... params) {
         return getProvider().of(fragment).with(params);
     }
 

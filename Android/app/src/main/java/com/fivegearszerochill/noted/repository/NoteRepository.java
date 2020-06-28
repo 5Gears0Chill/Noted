@@ -7,26 +7,25 @@ import androidx.paging.DataSource;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-import com.fivegearszerochill.noted.room.dao.NotebookDao;
+import com.fivegearszerochill.noted.room.dao.NoteDao;
 import com.fivegearszerochill.noted.room.database.NotedDatabase;
-import com.fivegearszerochill.noted.room.entity.NotebookEntity;
-import com.fivegearszerochill.noted.util.mutithreading.BackgroundTask;
+import com.fivegearszerochill.noted.room.entity.queryable.NoteAndAttributesAndNotebook;
 import com.fivegearszerochill.noted.util.mutithreading.TaskRunner;
 import com.fivegearszerochill.noted.util.repository.ExecutorHelper;
 import com.fivegearszerochill.noted.util.repository.PagingHelper;
 
-public class NotebookRepository {
-    private NotebookDao notebookDao;
+public class NoteRepository {
+    private NoteDao noteDao;
     private TaskRunner taskRunner;
 
-    public NotebookRepository(Application application) {
+    public NoteRepository(Application application) {
         NotedDatabase database = NotedDatabase.getInstance(application);
-        notebookDao = database.getNoteBookDao();
+        noteDao = database.getNoteDao();
         taskRunner = new TaskRunner();
     }
 
-    public LiveData<PagedList<NotebookEntity>> getPaginatedNotebooksAsync() {
-        DataSource.Factory<Integer, NotebookEntity> dataSource = notebookDao.getPagedNotebooks();
+    public LiveData<PagedList<NoteAndAttributesAndNotebook>> getRecentNotesPaginatedAsync() {
+        DataSource.Factory<Integer, NoteAndAttributesAndNotebook> dataSource = noteDao.getRecentNotesPaginated();
 
         return new LivePagedListBuilder<>(
                 dataSource,
@@ -34,15 +33,4 @@ public class NotebookRepository {
                 .setFetchExecutor(ExecutorHelper.getSingleThreadExecutor())
                 .build();
     }
-
-    public void insertNewNotebook(final NotebookEntity notebook) {
-        taskRunner.executeAsync(new BackgroundTask(notebookDao, notebook), (data) -> {
-            if (data != null) {
-                //notify UI SUCCESS
-            }
-            //notify UI Failure
-        });
-    }
-
-
 }

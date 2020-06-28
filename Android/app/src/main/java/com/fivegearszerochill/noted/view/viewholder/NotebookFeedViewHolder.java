@@ -19,19 +19,8 @@ public class NotebookFeedViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindTo(NotebookEntity entity) {
-        binding.cardBackInclusion.ncDescription.setText(entity.getDescription());
-        binding.cardFrontInclusion.ncTitle.setText(entity.getTitle());
+        binding.ncDescription.setText(entity.getDescription());
+        binding.ncTitle.setText(entity.getTitle());
 
-        binding.cardFront.setOnClickListener(view -> {
-            if (listener != null) {
-                listener.onBookmarkFrontItemClicked(view, binding.cardBack);
-            }
-        });
-
-        binding.cardBack.setOnClickListener(view -> {
-            if(listener != null) {
-                listener.onBookmarkBackItemClicked(view, binding.cardFront);
-            }
-        });
     }
 }

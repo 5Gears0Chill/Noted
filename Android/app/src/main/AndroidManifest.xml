@@ -9,15 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.CreateNotebookActivity"></activity>
-        <activity android:name=".view.CrashActivity" />
-        <activity android:name=".view.MainActivity">
+        <activity
+            android:name=".view.activities.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.activities.CreateNotebookActivity" />
+        <activity android:name=".view.activities.CrashActivity" />
     </application>
 
 </manifest>

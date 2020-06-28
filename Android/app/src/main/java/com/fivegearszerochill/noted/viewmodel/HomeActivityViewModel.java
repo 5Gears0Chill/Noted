@@ -10,10 +10,10 @@ import androidx.paging.PagedList;
 import com.fivegearszerochill.noted.repository.NotebookRepository;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
 
-public class MainActivityViewModel extends AndroidViewModel {
+public class HomeActivityViewModel extends AndroidViewModel {
     private NotebookRepository notebookRepository;
 
-    public MainActivityViewModel(@NonNull Application application) {
+    public HomeActivityViewModel(@NonNull Application application) {
         super(application);
         notebookRepository = new NotebookRepository(application);
     }
@@ -22,8 +22,8 @@ public class MainActivityViewModel extends AndroidViewModel {
         notebookRepository.insertNewNotebook(notebook);
     }
 
-    public LiveData<PagedList<NotebookEntity>> getPaginatedNotes() {
-        return notebookRepository.getPaginatedNotesAsync();
+    public LiveData<PagedList<NotebookEntity>> getPaginatedNotebooks() {
+        return notebookRepository.getPaginatedNotebooksAsync();
     }
 
 

@@ -10,7 +10,7 @@ import androidx.room.Update;
 import com.fivegearszerochill.noted.room.entity.CoreEntity;
 import com.fivegearszerochill.noted.room.entity.NoteAttributeEntity;
 import com.fivegearszerochill.noted.room.entity.NoteEntity;
-import com.fivegearszerochill.noted.room.entity.queryable.NoteAndAttributes;
+import com.fivegearszerochill.noted.room.entity.queryable.NoteAndAttributesAndNotebook;
 import com.fivegearszerochill.noted.room.entity.queryable.NoteWithResources;
 import com.fivegearszerochill.noted.room.entity.queryable.NoteWithTags;
 import com.fivegearszerochill.noted.room.entity.queryable.NoteWithTagsAndResources;
@@ -24,7 +24,16 @@ public abstract class NoteDao implements CoreDao {
             "SELECT * FROM note " +
                     "WHERE note_id =:noteId"
     )
-    abstract NoteAndAttributes getNoteAndAttributes(int noteId);
+    abstract NoteAndAttributesAndNotebook getNoteAndAttributes(int noteId);
+
+    @Transaction
+    @Query(
+            "SELECT * FROM note " +
+                    "INNER JOIN note_attribute " +
+                    "ON note_attribute.note_id = note.note_id " +
+                    "ORDER BY note_attribute.created_on DESC"
+    )
+    public abstract DataSource.Factory<Integer,NoteAndAttributesAndNotebook> getRecentNotesPaginated();
 
     @Transaction
     @Query(
@@ -58,10 +67,10 @@ public abstract class NoteDao implements CoreDao {
 //    public abstract DataSource.Factory<Integer, NoteAndAttributes> getPaginatedNotesAndAttributes();
 
     @Insert
-    abstract long createNote(NoteEntity note);
+    public abstract long createNote(NoteEntity note);
 
     @Insert
-    abstract void createNoteAttribute(NoteAttributeEntity noteAttribute);
+    public abstract void createNoteAttribute(NoteAttributeEntity noteAttribute);
 
     @Transaction
     @Override

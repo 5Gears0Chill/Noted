@@ -22,7 +22,7 @@ public class NoteCategoryEntity implements CoreEntity {
         this.isActive = isActive;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(long categoryId) {
         this.categoryId = categoryId;
     }
 
