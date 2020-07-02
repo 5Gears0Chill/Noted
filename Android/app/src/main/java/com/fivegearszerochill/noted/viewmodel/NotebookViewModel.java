@@ -8,18 +8,19 @@ import androidx.lifecycle.LiveData;
 import androidx.paging.PagedList;
 
 import com.fivegearszerochill.noted.repository.NotebookRepository;
+import com.fivegearszerochill.noted.repository.OnNotebookInsertedCall;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
 
-public class HomeActivityViewModel extends AndroidViewModel {
+public class NotebookViewModel extends AndroidViewModel {
     private NotebookRepository notebookRepository;
 
-    public HomeActivityViewModel(@NonNull Application application) {
+    public NotebookViewModel(@NonNull Application application) {
         super(application);
         notebookRepository = new NotebookRepository(application);
     }
 
-    public void insertNotebook(NotebookEntity notebook) {
-        notebookRepository.insertNewNotebook(notebook);
+    public void insertNotebook(NotebookEntity notebook, @NonNull OnNotebookInsertedCall insertedCall) {
+        notebookRepository.insertNewNotebook(notebook, insertedCall);
     }
 
     public LiveData<PagedList<NotebookEntity>> getPaginatedNotebooks() {

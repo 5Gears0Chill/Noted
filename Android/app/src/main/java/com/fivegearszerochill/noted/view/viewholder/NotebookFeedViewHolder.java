@@ -21,6 +21,6 @@ public class NotebookFeedViewHolder extends RecyclerView.ViewHolder {
     public void bindTo(NotebookEntity entity) {
         binding.ncDescription.setText(entity.getDescription());
         binding.ncTitle.setText(entity.getTitle());
-
+        binding.ncCard.setCardBackgroundColor(entity.getCardColorId());
     }
 }

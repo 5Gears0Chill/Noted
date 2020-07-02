@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b5287bc9b9871ce2688aabe9351f4e6f",
+    "identityHash": "ad3b0b56b36f10d6c253d9e6f9b2b676",
     "entities": [
       {
         "tableName": "note_attribute",
@@ -71,7 +71,7 @@
       },
       {
         "tableName": "notebook",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`notebook_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description` TEXT, `tag_id` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`notebook_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description` TEXT, `tag_id` INTEGER NOT NULL, `card_color_id` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "notebookId",
@@ -94,6 +94,12 @@
           {
             "fieldPath": "tagId",
             "columnName": "tag_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cardColorId",
+            "columnName": "card_color_id",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -413,7 +419,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b5287bc9b9871ce2688aabe9351f4e6f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ad3b0b56b36f10d6c253d9e6f9b2b676')"
     ]
   }
 }

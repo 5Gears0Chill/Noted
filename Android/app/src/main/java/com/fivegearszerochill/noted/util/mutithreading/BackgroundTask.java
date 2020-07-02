@@ -16,8 +16,7 @@ public class BackgroundTask implements Callable<Long> {
 
     @Override
     public Long call() {
-        dao.insertAsync(entity);
-        return null;
+        return dao.insertAsync(entity);
     }
 }
 

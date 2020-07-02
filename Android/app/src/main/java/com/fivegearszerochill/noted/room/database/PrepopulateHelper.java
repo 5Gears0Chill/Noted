@@ -13,8 +13,8 @@ public class PrepopulateHelper {
     public static final boolean INACTIVE = false;
 
 
-    public static NotebookEntity createNotebook(String title, String description, long tagId){
-        return new NotebookEntity(title, description, tagId);
+    public static NotebookEntity createNotebook(String title, String description, int cardColorId){
+        return new NotebookEntity(title, description, cardColorId);
     }
 
     public static NoteEntity createNote(long notebookId, String title, String content){

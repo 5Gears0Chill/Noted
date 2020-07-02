@@ -20,13 +20,13 @@ public class NotebookEntity implements CoreEntity {
     @ColumnInfo(name = "description")
     private String description;
 
-    @ColumnInfo(name = "tag_id")
-    private long tagId;
+    @ColumnInfo(name = "card_color_id")
+    private int cardColorId;
 
-    public NotebookEntity(String title, String description, long tagId) {
+    public NotebookEntity(String title, String description, int cardColorId) {
         this.title = title;
         this.description = description;
-        this.tagId = tagId;
+        this.cardColorId = cardColorId;
     }
 
     public void setNotebookId(long notebookId) {
@@ -45,9 +45,7 @@ public class NotebookEntity implements CoreEntity {
         return description;
     }
 
-    public long getTagId() {
-        return tagId;
-    }
+    public int getCardColorId() { return  cardColorId; }
 
     @Override
     public boolean equals(@Nullable Object obj) {
