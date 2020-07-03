@@ -30,6 +30,13 @@ public class HomeActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         init();
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        handleInitialNotebookLoading();
+        handleFabOnClickEvent();
+        handleNotebookCardListeners();
+    }
 
     private void init() {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
@@ -52,19 +59,19 @@ public class HomeActivity extends AppCompatActivity{
         binding.contentScrolling.recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    private void handleInitialNotebookLoading() {
         viewModel.getPaginatedNotebooks().observe(this, notebookEntities -> {
             adapter.submitList(notebookEntities);
         });
+    }
 
+    private void handleFabOnClickEvent() {
         binding.fab.setOnClickListener(view -> {
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
             startActivity(new Intent(this, CreateNotebookActivity.class));
         });
+    }
 
+    private void handleNotebookCardListeners() {
         adapter.setListener(new OnNoteItemClickListener() {
             @Override
             public void onNoteLongPressed(View view, int position) {
