@@ -1,25 +1,28 @@
 package com.fivegearszerochill.noted.view.activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-
-import com.fivegearszerochill.noted.R;
-import com.fivegearszerochill.noted.databinding.ActivityHomeBinding;
-import com.fivegearszerochill.noted.view.adapters.SectionsPagerAdapter;
-import com.fivegearszerochill.noted.view.adapters.NotebookFeed;
-import com.fivegearszerochill.noted.view.interfaces.OnNoteItemClickListener;
-import com.fivegearszerochill.noted.viewmodel.NotebookViewModel;
-import com.fivegearszerochill.noted.viewmodel.factory.ViewModelParameterizedProvider;
-import com.google.android.material.snackbar.Snackbar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class HomeActivity extends AppCompatActivity{
+import com.fivegearszerochill.noted.R;
+import com.fivegearszerochill.noted.databinding.ActivityHomeBinding;
+import com.fivegearszerochill.noted.view.adapters.NotebookFeed;
+import com.fivegearszerochill.noted.view.adapters.SectionsPagerAdapter;
+import com.fivegearszerochill.noted.view.interfaces.OnNoteItemClickListener;
+import com.fivegearszerochill.noted.viewmodel.NotebookViewModel;
+import com.fivegearszerochill.noted.viewmodel.factory.ViewModelParameterizedProvider;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+public class HomeActivity extends AppCompatActivity {
 
     private NotebookViewModel viewModel;
     private ActivityHomeBinding binding;
@@ -30,6 +33,7 @@ public class HomeActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         init();
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -82,7 +86,20 @@ public class HomeActivity extends AppCompatActivity{
             @Override
             public void onCloseButtonClicked(View view, int position) {
                 view.clearAnimation();
+                createDeleteConfirmationPopup(view, position);
             }
         });
+    }
+
+    private void createDeleteConfirmationPopup(View view, int position) {
+        new MaterialAlertDialogBuilder(view.getRootView().getContext())
+                .setTitle("Delete " + adapter.getItemByPosition(position).getTitle() + "?")
+                .setMessage("This cannot be undone. " +
+                        "Are you sure you would like to delete " +
+                        adapter.getItemByPosition(position).getTitle() + "?")
+                .setNeutralButton("CANCEL", (dialogInterface, i) -> Toast.makeText(HomeActivity.this, "CANCELLED", Toast.LENGTH_SHORT).show()).setPositiveButton("DELETE", (dialogInterface, i) -> {
+                    viewModel.deleteNotebook(adapter.getItemByPosition(position));
+                    Toast.makeText(HomeActivity.this, "Deleted " + adapter.getItemByPosition(position).getTitle(), Toast.LENGTH_SHORT).show();
+                }).show();
     }
 }

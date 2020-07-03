@@ -106,4 +106,9 @@ public abstract class NoteDao implements CoreDao {
             "FROM note " +
             "WHERE note_id =:noteId")
     abstract void deleteNote(int noteId);
+
+    @Override
+    public void deleteAsync(CoreEntity entity) {
+
+    }
 }

@@ -27,5 +27,9 @@ public class NotebookViewModel extends AndroidViewModel {
         return notebookRepository.getPaginatedNotebooksAsync();
     }
 
+    public void deleteNotebook(NotebookEntity notebook) {
+        notebookRepository.deleteNotebook(notebook);
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.fivegearszerochill.noted.room.dao;
 
 import androidx.paging.DataSource;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
@@ -31,5 +32,11 @@ public abstract class NotebookDao implements CoreDao {
         return addNewNoteBook((NotebookEntity) entity);
     }
 
+    @Delete
+    public abstract void deleteNotebook(NotebookEntity entity);
 
+    @Override
+    public void deleteAsync(CoreEntity entity) {
+        deleteNotebook((NotebookEntity) entity);
+    }
 }

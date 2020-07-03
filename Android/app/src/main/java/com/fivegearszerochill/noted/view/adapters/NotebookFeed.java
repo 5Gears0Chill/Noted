@@ -41,4 +41,8 @@ public class NotebookFeed extends PagedListAdapter<NotebookEntity, NotebookFeedV
             holder.bindTo(entity);
         }
     }
+
+    public NotebookEntity getItemByPosition(int position) {
+        return getItem(position);
+    }
 }
