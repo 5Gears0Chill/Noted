@@ -113,9 +113,10 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="tab_text_1">Recent Notes</string>
     <string name="tab_text_2">Bookmarked</string>
+    <string name="delete_card">delete card</string>
 
 
-<!--    COLOR TESTING-->
+    <!--    COLOR TESTING-->
     <color name="AliceBlue">#F0F8FF</color>
     <color name="AntiqueWhite">#FAEBD7</color>
     <color name="aqua">#00FFFF</color>
