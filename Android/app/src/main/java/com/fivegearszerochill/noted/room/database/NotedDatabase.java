@@ -14,7 +14,6 @@ import com.fivegearszerochill.noted.room.dao.CategoryDao;
 import com.fivegearszerochill.noted.room.dao.NoteDao;
 import com.fivegearszerochill.noted.room.dao.NotebookDao;
 import com.fivegearszerochill.noted.room.dao.TagDao;
-import com.fivegearszerochill.noted.room.entity.NoteAttributeEntity;
 import com.fivegearszerochill.noted.room.entity.NoteCategoryEntity;
 import com.fivegearszerochill.noted.room.entity.NoteEntity;
 import com.fivegearszerochill.noted.room.entity.NoteResourceEntity;
@@ -24,7 +23,6 @@ import com.fivegearszerochill.noted.room.entity.ResourceTypeEntity;
 import com.fivegearszerochill.noted.room.entity.TagEntity;
 
 @Database(entities = {
-        NoteAttributeEntity.class,
         NotebookEntity.class,
         NoteCategoryEntity.class,
         NoteEntity.class,
@@ -35,7 +33,7 @@ import com.fivegearszerochill.noted.room.entity.TagEntity;
 }, version = NotedDatabase.VERSION)
 @TypeConverters({Converters.class})
 public abstract class NotedDatabase extends RoomDatabase {
-    public static final int VERSION = 3;
+    public static final int VERSION = 4;
 
     private static NotedDatabase instance;
 

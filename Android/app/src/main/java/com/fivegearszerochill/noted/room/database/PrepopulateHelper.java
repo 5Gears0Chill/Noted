@@ -1,12 +1,9 @@
 package com.fivegearszerochill.noted.room.database;
 
-import com.fivegearszerochill.noted.room.entity.NoteAttributeEntity;
 import com.fivegearszerochill.noted.room.entity.NoteCategoryEntity;
 import com.fivegearszerochill.noted.room.entity.NoteEntity;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
-import com.fivegearszerochill.noted.util.room.NoteAttributeHelper;
-
-import java.util.List;
+import com.fivegearszerochill.noted.util.general.DateHelper;
 
 public class PrepopulateHelper {
     public static final boolean ACTIVE = true;
@@ -17,17 +14,8 @@ public class PrepopulateHelper {
         return new NotebookEntity(title, description, cardColorId);
     }
 
-    public static NoteEntity createNote(long notebookId, String title, String content){
-        return new NoteEntity(notebookId, title, content);
-    }
-
-    public static NoteAttributeEntity createNoteAttribute(long noteId, long categoryId){
-        return new NoteAttributeEntity(
-                noteId,
-                NoteAttributeHelper.getCurrentDate(),
-                NoteAttributeHelper.getCurrentDate(),
-                categoryId
-        );
+    public static NoteEntity createNote(long notebookId, String title, String content, long categoryId){
+        return new NoteEntity(notebookId, title, content, DateHelper.getCurrentDate(),DateHelper.getCurrentDate(),categoryId);
     }
 
     public static NoteCategoryEntity createCategory(String description) {

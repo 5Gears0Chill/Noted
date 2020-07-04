@@ -24,7 +24,13 @@ public class NotebookFeedViewHolder extends RecyclerView.ViewHolder {
         binding.ncDescription.setText(entity.getDescription());
         binding.ncTitle.setText(entity.getTitle());
         binding.ncCard.setCardBackgroundColor(entity.getCardColorId());
+        handleOnLongPressedInit();
+        handleOnClickButtonInit();
+        handleOnNoteClickedInit();
 
+    }
+
+    private void handleOnLongPressedInit() {
         binding.ncCard.setOnLongClickListener(view -> {
             if (listener != null) {
                 int position = getAdapterPosition();
@@ -35,13 +41,26 @@ public class NotebookFeedViewHolder extends RecyclerView.ViewHolder {
             }
             return true;
         });
+    }
 
+    private void handleOnClickButtonInit() {
         binding.ncCloseButton.setOnClickListener(view -> {
             if (listener != null) {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
                     listener.onCloseButtonClicked(binding.ncCard, position);
                     binding.ncCloseButton.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    private void handleOnNoteClickedInit() {
+        binding.ncCard.setOnClickListener(view -> {
+            if (listener != null) {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.onNoteClicked(view, position);
                 }
             }
         });

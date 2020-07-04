@@ -8,15 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
 
 import com.fivegearszerochill.noted.databinding.RecentNoteCardBinding;
-import com.fivegearszerochill.noted.room.entity.queryable.NoteAndAttributesAndNotebook;
+import com.fivegearszerochill.noted.room.entity.queryable.NoteAndNotebook;
 import com.fivegearszerochill.noted.view.viewholder.RecentNotesFeedViewHolder;
 
-public class RecentNotesFeed extends PagedListAdapter<NoteAndAttributesAndNotebook, RecentNotesFeedViewHolder> {
+public class RecentNotesFeed extends PagedListAdapter<NoteAndNotebook, RecentNotesFeedViewHolder> {
 
     private Context context;
 
     public RecentNotesFeed(Context context){
-        super(NoteAndAttributesAndNotebook.DIFF_CALLBACK);
+        super(NoteAndNotebook.DIFF_CALLBACK);
         this.context = context;
     }
 
@@ -30,7 +30,7 @@ public class RecentNotesFeed extends PagedListAdapter<NoteAndAttributesAndNotebo
 
     @Override
     public void onBindViewHolder(@NonNull RecentNotesFeedViewHolder holder, int position) {
-        NoteAndAttributesAndNotebook entity = getItem(position);
+        NoteAndNotebook entity = getItem(position);
         if(entity != null){
             holder.bindTo(entity);
         }

@@ -9,7 +9,8 @@ import androidx.paging.PagedList;
 
 import com.fivegearszerochill.noted.room.dao.NoteDao;
 import com.fivegearszerochill.noted.room.database.NotedDatabase;
-import com.fivegearszerochill.noted.room.entity.queryable.NoteAndAttributesAndNotebook;
+import com.fivegearszerochill.noted.room.entity.NoteEntity;
+import com.fivegearszerochill.noted.room.entity.queryable.NoteAndNotebook;
 import com.fivegearszerochill.noted.util.mutithreading.TaskRunner;
 import com.fivegearszerochill.noted.util.repository.ExecutorHelper;
 import com.fivegearszerochill.noted.util.repository.PagingHelper;
@@ -24,8 +25,8 @@ public class NoteRepository {
         taskRunner = new TaskRunner();
     }
 
-    public LiveData<PagedList<NoteAndAttributesAndNotebook>> getRecentNotesPaginatedAsync() {
-        DataSource.Factory<Integer, NoteAndAttributesAndNotebook> dataSource = noteDao.getRecentNotesPaginated();
+    public LiveData<PagedList<NoteAndNotebook>> getRecentNotesPaginatedAsync() {
+        DataSource.Factory<Integer, NoteAndNotebook> dataSource = noteDao.getRecentNotesPaginated();
 
         return new LivePagedListBuilder<>(
                 dataSource,
@@ -33,4 +34,14 @@ public class NoteRepository {
                 .setFetchExecutor(ExecutorHelper.getSingleThreadExecutor())
                 .build();
     }
+
+    public LiveData<PagedList<NoteEntity>> getNotesAsync(int notebookId) {
+        DataSource.Factory<Integer, NoteEntity> dataSource = noteDao.getNotesPaginated(notebookId);
+        return new LivePagedListBuilder<>(
+                dataSource,
+                PagingHelper.getPagingConfig())
+                .setFetchExecutor(ExecutorHelper.getSingleThreadExecutor())
+                .build();
+    }
+
 }

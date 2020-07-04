@@ -1,7 +1,5 @@
 package com.fivegearszerochill.noted.view.activities;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fivegearszerochill.noted.R;
 import com.fivegearszerochill.noted.databinding.ActivityHomeBinding;
+import com.fivegearszerochill.noted.room.entity.NotebookEntity;
 import com.fivegearszerochill.noted.view.adapters.NotebookFeed;
 import com.fivegearszerochill.noted.view.adapters.SectionsPagerAdapter;
 import com.fivegearszerochill.noted.view.interfaces.OnNoteItemClickListener;
@@ -88,7 +87,21 @@ public class HomeActivity extends AppCompatActivity {
                 view.clearAnimation();
                 createDeleteConfirmationPopup(view, position);
             }
+
+            @Override
+            public void onNoteClicked(View view, int position) {
+                NotebookEntity entity = adapter.getItemByPosition(position);
+                if (entity != null) {
+                    sendToNotebookActivity(entity.getNotebookId());
+                }
+            }
         });
+    }
+
+    private void sendToNotebookActivity(long id) {
+        Intent intent = new Intent(HomeActivity.this,NotebookActivity.class);
+        intent.putExtra("notebookId",id);
+        startActivity(intent);
     }
 
     private void createDeleteConfirmationPopup(View view, int position) {
@@ -98,8 +111,8 @@ public class HomeActivity extends AppCompatActivity {
                         "Are you sure you would like to delete " +
                         adapter.getItemByPosition(position).getTitle() + "?")
                 .setNeutralButton("CANCEL", (dialogInterface, i) -> Toast.makeText(HomeActivity.this, "CANCELLED", Toast.LENGTH_SHORT).show()).setPositiveButton("DELETE", (dialogInterface, i) -> {
-                    viewModel.deleteNotebook(adapter.getItemByPosition(position));
-                    Toast.makeText(HomeActivity.this, "Deleted " + adapter.getItemByPosition(position).getTitle(), Toast.LENGTH_SHORT).show();
-                }).show();
+            viewModel.deleteNotebook(adapter.getItemByPosition(position));
+            Toast.makeText(HomeActivity.this, "Deleted " + adapter.getItemByPosition(position).getTitle(), Toast.LENGTH_SHORT).show();
+        }).show();
     }
 }

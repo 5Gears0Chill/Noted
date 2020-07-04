@@ -6,20 +6,12 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
-import com.fivegearszerochill.noted.room.entity.NoteAttributeEntity;
 import com.fivegearszerochill.noted.room.entity.NoteEntity;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
 
-public class NoteAndAttributesAndNotebook {
+public class NoteAndNotebook {
     @Embedded
     private NoteEntity note;
-
-
-    @Relation(
-            parentColumn = "note_id",
-            entityColumn = "note_attribute_id"
-    )
-    private NoteAttributeEntity attributes;
 
 
     @Relation(
@@ -28,9 +20,8 @@ public class NoteAndAttributesAndNotebook {
     )
     private NotebookEntity notebook;
 
-    public NoteAndAttributesAndNotebook(NoteEntity note, NoteAttributeEntity attributes, NotebookEntity notebook) {
+    public NoteAndNotebook(NoteEntity note, NotebookEntity notebook) {
         this.note = note;
-        this.attributes = attributes;
         this.notebook = notebook;
     }
 
@@ -43,14 +34,6 @@ public class NoteAndAttributesAndNotebook {
         this.note = note;
     }
 
-    public NoteAttributeEntity getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(NoteAttributeEntity attributes) {
-        this.attributes = attributes;
-    }
-
     public NotebookEntity getNotebook() {
         return notebook;
     }
@@ -60,16 +43,16 @@ public class NoteAndAttributesAndNotebook {
     }
 
 
-    public static final DiffUtil.ItemCallback<NoteAndAttributesAndNotebook> DIFF_CALLBACK =
-            new DiffUtil.ItemCallback<NoteAndAttributesAndNotebook>() {
+    public static final DiffUtil.ItemCallback<NoteAndNotebook> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<NoteAndNotebook>() {
 
         @Override
-        public boolean areItemsTheSame(@NonNull NoteAndAttributesAndNotebook oldItem, @NonNull NoteAndAttributesAndNotebook newItem) {
+        public boolean areItemsTheSame(@NonNull NoteAndNotebook oldItem, @NonNull NoteAndNotebook newItem) {
             return oldItem.getNote().getNoteId() == newItem.getNote().getNoteId();
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull NoteAndAttributesAndNotebook oldItem, @NonNull NoteAndAttributesAndNotebook newItem) {
+        public boolean areContentsTheSame(@NonNull NoteAndNotebook oldItem, @NonNull NoteAndNotebook newItem) {
             return oldItem.equals(newItem);
         }
     };
@@ -83,7 +66,7 @@ public class NoteAndAttributesAndNotebook {
             if (obj == this) {
                 return true;
             }
-            NoteAndAttributesAndNotebook note = (NoteAndAttributesAndNotebook) obj;
+            NoteAndNotebook note = (NoteAndNotebook) obj;
             return note.getNote().getNoteId() == this.getNote().getNoteId();
         }
         return false;

@@ -1,13 +1,10 @@
 package com.fivegearszerochill.noted.view.viewholder;
 
-import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fivegearszerochill.noted.databinding.RecentNoteCardBinding;
-import com.fivegearszerochill.noted.room.entity.NoteEntity;
-import com.fivegearszerochill.noted.room.entity.queryable.NoteAndAttributesAndNotebook;
+import com.fivegearszerochill.noted.room.entity.queryable.NoteAndNotebook;
 
 public class RecentNotesFeedViewHolder extends RecyclerView.ViewHolder {
 
@@ -19,7 +16,7 @@ public class RecentNotesFeedViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public void bindTo(NoteAndAttributesAndNotebook entity){
+    public void bindTo(NoteAndNotebook entity){
         binding.rncTitle.setText(entity.getNote().getTitle());
         binding.rncNotebook.setText(entity.getNotebook().getTitle());
     }

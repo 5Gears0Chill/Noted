@@ -1,9 +1,8 @@
-package com.fivegearszerochill.noted.util.room;
+package com.fivegearszerochill.noted.util.general;
 
 import java.util.Date;
 
-public class NoteAttributeHelper {
-
+public class DateHelper {
     public static Date getCurrentDate() {
         return new Date();
     }
