@@ -57,4 +57,8 @@ public class NotebookRepository {
         taskRunner.executeAsync(new BackgroundDeleteTask(notebookDao, notebook), (data) -> {
         });
     }
+
+    public LiveData<NotebookEntity> getNotebookById(long notebookId) {
+        return notebookDao.getNotebook(notebookId);
+    }
 }

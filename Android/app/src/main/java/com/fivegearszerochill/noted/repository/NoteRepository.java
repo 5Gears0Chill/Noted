@@ -35,7 +35,7 @@ public class NoteRepository {
                 .build();
     }
 
-    public LiveData<PagedList<NoteEntity>> getNotesAsync(int notebookId) {
+    public LiveData<PagedList<NoteEntity>> getNotesAsync(long notebookId) {
         DataSource.Factory<Integer, NoteEntity> dataSource = noteDao.getNotesPaginated(notebookId);
         return new LivePagedListBuilder<>(
                 dataSource,

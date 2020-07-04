@@ -1,5 +1,6 @@
 package com.fivegearszerochill.noted.room.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -39,4 +40,9 @@ public abstract class NotebookDao implements CoreDao {
     public void deleteAsync(CoreEntity entity) {
         deleteNotebook((NotebookEntity) entity);
     }
+
+    @Transaction
+    @Query("SELECT * " +
+            "FROM notebook WHERE notebook_id =:notebookId")
+    public abstract LiveData<NotebookEntity> getNotebook(long notebookId);
 }

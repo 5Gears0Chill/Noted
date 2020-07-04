@@ -26,8 +26,6 @@ public class SelectedColorViewHolder extends RecyclerView.ViewHolder {
         this.listener = listener;
     }
 
-    private static final String TAG = "SelectedColorViewHolder";
-
     public void bindTo(ColorModel model) {
         binding.cscCard.setCardBackgroundColor(model.getColorId());
         binding.cscCard.setOnClickListener(view -> {

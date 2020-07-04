@@ -81,5 +81,5 @@ public abstract class NoteDao implements CoreDao {
                     "WHERE note.notebook_id = :notebookId " +
                     "ORDER BY note.created_on"
     )
-    public abstract DataSource.Factory<Integer, NoteEntity> getNotesPaginated(int notebookId);
+    public abstract DataSource.Factory<Integer, NoteEntity> getNotesPaginated(long notebookId);
 }

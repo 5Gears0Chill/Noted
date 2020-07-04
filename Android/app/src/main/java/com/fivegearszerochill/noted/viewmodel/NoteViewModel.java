@@ -18,7 +18,7 @@ public class NoteViewModel extends AndroidViewModel {
         repository = new NoteRepository(application);
     }
 
-    public LiveData<PagedList<NoteEntity>> getPaginatedNotes(int notebookId) {
+    public LiveData<PagedList<NoteEntity>> getPaginatedNotes(long notebookId) {
         return repository.getNotesAsync(notebookId);
     }
 }

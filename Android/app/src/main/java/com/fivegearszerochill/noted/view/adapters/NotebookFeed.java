@@ -9,15 +9,15 @@ import androidx.paging.PagedListAdapter;
 
 import com.fivegearszerochill.noted.databinding.NotebookCardBinding;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
-import com.fivegearszerochill.noted.view.interfaces.OnNoteItemClickListener;
+import com.fivegearszerochill.noted.view.interfaces.OnNotebookItemClickListener;
 import com.fivegearszerochill.noted.view.viewholder.NotebookFeedViewHolder;
 
 public class NotebookFeed extends PagedListAdapter<NotebookEntity, NotebookFeedViewHolder> {
 
     private Context context;
-    private OnNoteItemClickListener mListener;
+    private OnNotebookItemClickListener mListener;
 
-    public void setListener(OnNoteItemClickListener mListener) {
+    public void setListener(OnNotebookItemClickListener mListener) {
         this.mListener = mListener;
     }
 

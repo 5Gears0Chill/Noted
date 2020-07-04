@@ -12,24 +12,27 @@ import com.fivegearszerochill.noted.repository.OnNotebookInsertedCall;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
 
 public class NotebookViewModel extends AndroidViewModel {
-    private NotebookRepository notebookRepository;
+    private NotebookRepository repository;
 
     public NotebookViewModel(@NonNull Application application) {
         super(application);
-        notebookRepository = new NotebookRepository(application);
+        repository = new NotebookRepository(application);
     }
 
     public void insertNotebook(NotebookEntity notebook, @NonNull OnNotebookInsertedCall insertedCall) {
-        notebookRepository.insertNewNotebook(notebook, insertedCall);
+        repository.insertNewNotebook(notebook, insertedCall);
     }
 
     public LiveData<PagedList<NotebookEntity>> getPaginatedNotebooks() {
-        return notebookRepository.getPaginatedNotebooksAsync();
+        return repository.getPaginatedNotebooksAsync();
     }
 
     public void deleteNotebook(NotebookEntity notebook) {
-        notebookRepository.deleteNotebook(notebook);
+        repository.deleteNotebook(notebook);
     }
 
 
+    public LiveData<NotebookEntity> getNotebook(long notebookId) {
+        return repository.getNotebookById(notebookId);
+    }
 }

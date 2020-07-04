@@ -16,7 +16,7 @@ import com.fivegearszerochill.noted.databinding.ActivityHomeBinding;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
 import com.fivegearszerochill.noted.view.adapters.NotebookFeed;
 import com.fivegearszerochill.noted.view.adapters.SectionsPagerAdapter;
-import com.fivegearszerochill.noted.view.interfaces.OnNoteItemClickListener;
+import com.fivegearszerochill.noted.view.interfaces.OnNotebookItemClickListener;
 import com.fivegearszerochill.noted.viewmodel.NotebookViewModel;
 import com.fivegearszerochill.noted.viewmodel.factory.ViewModelParameterizedProvider;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void handleNotebookCardListeners() {
-        adapter.setListener(new OnNoteItemClickListener() {
+        adapter.setListener(new OnNotebookItemClickListener() {
             @Override
             public void onNoteLongPressed(View view, int position) {
                 Animation animation = AnimationUtils.loadAnimation(view.getContext(), R.anim.shake);

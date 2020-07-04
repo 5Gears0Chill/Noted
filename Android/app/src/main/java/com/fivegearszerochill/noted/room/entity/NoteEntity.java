@@ -1,11 +1,16 @@
 package com.fivegearszerochill.noted.room.entity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+
+import com.fivegearszerochill.noted.room.entity.queryable.NoteAndNotebook;
 
 import java.util.Date;
 
@@ -78,5 +83,35 @@ public class NoteEntity implements CoreEntity {
 
     public long getCategoryId() {
         return categoryId;
+    }
+
+
+    public static final DiffUtil.ItemCallback<NoteEntity> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<NoteEntity>() {
+
+                @Override
+                public boolean areItemsTheSame(@NonNull NoteEntity oldItem, @NonNull NoteEntity newItem) {
+                    return oldItem.getNoteId() == newItem.getNoteId();
+                }
+
+                @Override
+                public boolean areContentsTheSame(@NonNull NoteEntity oldItem, @NonNull NoteEntity newItem) {
+                    return oldItem.equals(newItem);
+                }
+            };
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj != null) {
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            if (obj == this) {
+                return true;
+            }
+            NoteEntity note = (NoteEntity) obj;
+            return note.getNoteId() == this.getNoteId();
+        }
+        return false;
     }
 }
