@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NotedAppTheme">
-        <activity android:name=".view.activities.NotebookActivity"></activity>
+        <activity android:name=".view.activities.NotebookActivity" />
         <activity
             android:name=".view.activities.HomeActivity"
             android:label="@string/title_activity_home"
