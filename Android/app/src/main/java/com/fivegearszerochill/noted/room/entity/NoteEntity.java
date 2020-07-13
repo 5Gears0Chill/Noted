@@ -1,11 +1,18 @@
 package com.fivegearszerochill.noted.room.entity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+
+import com.fivegearszerochill.noted.room.entity.queryable.NoteAndNotebook;
+
+import java.util.Date;
 
 @Entity(tableName = "note",
         foreignKeys = @ForeignKey(entity = NotebookEntity.class,
@@ -27,10 +34,23 @@ public class NoteEntity implements CoreEntity {
     @ColumnInfo(name = "content")
     private String content;
 
-    public NoteEntity(long notebookId, String title, String content) {
+    @ColumnInfo(name = "created_on")
+    private Date createdOn;
+
+    @ColumnInfo(name = "updated_on")
+    private Date updatedOn;
+
+    @ColumnInfo(name = "category_id")
+    private long categoryId;
+
+
+    public NoteEntity(long notebookId, String title, String content, Date createdOn, Date updatedOn, long categoryId) {
         this.notebookId = notebookId;
         this.title = title;
         this.content = content;
+        this.createdOn = createdOn;
+        this.updatedOn = updatedOn;
+        this.categoryId = categoryId;
     }
 
     public void setNoteId(long noteId) {
@@ -51,5 +71,47 @@ public class NoteEntity implements CoreEntity {
 
     public String getContent() {
         return content;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public Date getUpdatedOn() {
+        return updatedOn;
+    }
+
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+
+    public static final DiffUtil.ItemCallback<NoteEntity> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<NoteEntity>() {
+
+                @Override
+                public boolean areItemsTheSame(@NonNull NoteEntity oldItem, @NonNull NoteEntity newItem) {
+                    return oldItem.getNoteId() == newItem.getNoteId();
+                }
+
+                @Override
+                public boolean areContentsTheSame(@NonNull NoteEntity oldItem, @NonNull NoteEntity newItem) {
+                    return oldItem.equals(newItem);
+                }
+            };
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj != null) {
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            if (obj == this) {
+                return true;
+            }
+            NoteEntity note = (NoteEntity) obj;
+            return note.getNoteId() == this.getNoteId();
+        }
+        return false;
     }
 }

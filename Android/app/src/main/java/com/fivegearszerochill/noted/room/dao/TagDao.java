@@ -40,4 +40,10 @@ public abstract class TagDao implements CoreDao {
     public long insertAsync(CoreEntity entity) {
         return createNewTag((TagEntity) entity);
     }
+
+
+    @Override
+    public void deleteAsync(CoreEntity entity) {
+
+    }
 }

@@ -1,5 +1,8 @@
 package com.fivegearszerochill.noted.room.entity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -17,13 +20,13 @@ public class NotebookEntity implements CoreEntity {
     @ColumnInfo(name = "description")
     private String description;
 
-    @ColumnInfo(name = "tag_id")
-    private long tagId;
+    @ColumnInfo(name = "card_color_id")
+    private int cardColorId;
 
-    public NotebookEntity(String title, String description, long tagId) {
+    public NotebookEntity(String title, String description, int cardColorId) {
         this.title = title;
         this.description = description;
-        this.tagId = tagId;
+        this.cardColorId = cardColorId;
     }
 
     public void setNotebookId(long notebookId) {
@@ -42,7 +45,34 @@ public class NotebookEntity implements CoreEntity {
         return description;
     }
 
-    public long getTagId() {
-        return tagId;
+    public int getCardColorId() { return  cardColorId; }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj != null) {
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            if (obj == this) {
+                return true;
+            }
+            NotebookEntity notebook = (NotebookEntity) obj;
+            return notebook.getNotebookId() == this.getNotebookId();
+        }
+       return false;
     }
+
+
+    public static final DiffUtil.ItemCallback<NotebookEntity> DIFF_CALLBACK = new DiffUtil.ItemCallback<NotebookEntity>() {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull NotebookEntity oldItem, @NonNull NotebookEntity newItem) {
+            return oldItem.getNotebookId() == newItem.getNotebookId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull NotebookEntity oldItem, @NonNull NotebookEntity newItem) {
+            return oldItem.equals(newItem);
+        }
+    };
 }

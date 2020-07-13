@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nc_card"
+    android:layout_width="100dp"
+    android:layout_height="160dp"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:elevation="10dp"
+    card_view:cardCornerRadius="30dp">
+
+    <RelativeLayout
+        android:id="@+id/nc_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/nc_close_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp"
+            android:visibility="gone"
+            android:src="@drawable/ic_close"
+            android:contentDescription="@string/delete_card" />
+        <TextView
+            android:id="@+id/nc_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:scrollHorizontally="false"
+            android:text="@string/app_name"
+            android:textSize="@dimen/text_n"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/nc_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nc_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:scrollHorizontally="false"
+            android:text="@string/large_text"
+            android:textSize="@dimen/text_s"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
