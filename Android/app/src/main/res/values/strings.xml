@@ -315,5 +315,10 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="title">Enter your note title here…</string>
     <string name="type_here">Type here…</string>
+    <string name="note_image">Note Image</string>
+    <string name="sample_notebook_title">Sample Notebook Title</string>
+    <string name="some_text_about_what_this_card_is_about">Some Text about what this card is about</string>
+    <string name="_20_june_2020">20 June 2020</string>
+    <string name="edit">Edit</string>
 
 </resources>

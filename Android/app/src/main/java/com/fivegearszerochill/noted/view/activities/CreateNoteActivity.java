@@ -87,7 +87,9 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
     @Override
     public void updateSuccess() {
         Toast.makeText(this, "Note Saved", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(CreateNoteActivity.this, NotebookActivity.class));
+        Intent intent = new Intent(CreateNoteActivity.this, NotebookActivity.class);
+        intent.putExtra("notebookId", notebookId);
+        startActivity(intent);
     }
 
     @Override
@@ -111,12 +113,12 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
     }
 
     private void setNotebookId() {
-        binding.mdEditor.getDraft().setNotebookId(this.notebookId);
+        binding.mdEditor.setNoteBookId(this.notebookId);
     }
 
     private void setNoteTitle() {
         String title = binding.cnTitleEditText.getText().toString();
-        binding.mdEditor.getDraft().setDraftTitle(title);
+        binding.mdEditor.setDraftTitle(title);
     }
 
     private void initEditor() {

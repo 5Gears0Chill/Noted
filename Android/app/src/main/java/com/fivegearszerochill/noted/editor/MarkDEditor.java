@@ -174,6 +174,13 @@ public class MarkDEditor extends MarkDCore implements
         }
     }
 
+    public void setDraftTitle(String title) {
+        oldDraft.setDraftTitle(title);
+    }
+
+    public void setNoteBookId(long id){
+        oldDraft.setNotebookId(id);
+    }
     /**
      * method to send callback for focussed view back to subscriber(if any).
      *
@@ -536,8 +543,11 @@ public class MarkDEditor extends MarkDCore implements
         DraftModel newDraft = draftManager.processDraftContent(this);
         if (oldDraft != null) {
             newDraft.setDraftId(oldDraft.getDraftId());
+            newDraft.setNotebookId(oldDraft.getNotebookId());
+            newDraft.setDraftTitle(oldDraft.getDraftTitle());
         } else {
             newDraft.setDraftId(System.currentTimeMillis());
+            newDraft.setNotebookId(oldDraft.getNotebookId());
         }
         return newDraft;
     }

@@ -22,7 +22,7 @@ public class NoteFeedViewHolder extends RecyclerView.ViewHolder {
 
     public void bindTo(NoteEntity note) {
         binding.nTitle.setText(note.getTitle());
-        binding.nDescription.setText(StringHelper.getFirstNWords(note.getContent(), 10));
+        binding.nDescription.setText(note.getContent());
         binding.nDate.setText(DateHelper.convertDateToString(note.getUpdatedOn()));
         handleOnEditButtonInit();
     }
