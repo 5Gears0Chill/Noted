@@ -14,8 +14,8 @@ public class PrepopulateHelper {
         return new NotebookEntity(title, description, cardColorId);
     }
 
-    public static NoteEntity createNote(long notebookId, String title, String content, long categoryId){
-        return new NoteEntity(notebookId, title, content, DateHelper.getCurrentDate(),DateHelper.getCurrentDate(),categoryId);
+    public static NoteEntity createNote(long notebookId, String title, String content){
+        return new NoteEntity(notebookId, title, content, DateHelper.getCurrentDate(),DateHelper.getCurrentDate());
     }
 
     public static NoteCategoryEntity createCategory(String description) {

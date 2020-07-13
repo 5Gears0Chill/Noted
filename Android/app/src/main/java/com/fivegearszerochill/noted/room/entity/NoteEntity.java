@@ -40,17 +40,13 @@ public class NoteEntity implements CoreEntity {
     @ColumnInfo(name = "updated_on")
     private Date updatedOn;
 
-    @ColumnInfo(name = "category_id")
-    private long categoryId;
 
-
-    public NoteEntity(long notebookId, String title, String content, Date createdOn, Date updatedOn, long categoryId) {
+    public NoteEntity(long notebookId, String title, String content, Date createdOn, Date updatedOn) {
         this.notebookId = notebookId;
         this.title = title;
         this.content = content;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
-        this.categoryId = categoryId;
     }
 
     public void setNoteId(long noteId) {
@@ -80,11 +76,6 @@ public class NoteEntity implements CoreEntity {
     public Date getUpdatedOn() {
         return updatedOn;
     }
-
-    public long getCategoryId() {
-        return categoryId;
-    }
-
 
     public static final DiffUtil.ItemCallback<NoteEntity> DIFF_CALLBACK =
             new DiffUtil.ItemCallback<NoteEntity>() {
