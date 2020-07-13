@@ -40,7 +40,7 @@ public class NotebookRepository {
                 .build();
     }
 
-    public void insertNewNotebook(final NotebookEntity notebook, @NonNull OnNotebookInsertedCall insertedCall) {
+    public void insertNewNotebookAsync(final NotebookEntity notebook, @NonNull OnNotebookInsertedCall insertedCall) {
         this.onNotebookInsertedCall = insertedCall;
         taskRunner.executeAsync(new BackgroundInsertTask(notebookDao, notebook), (data) -> {
             Log.d(TAG, "insertNewNotebook: data from callback: " + data);

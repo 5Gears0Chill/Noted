@@ -14,6 +14,7 @@ public class DraftModel {
   public static final int ITEM_TYPE_IMAGE = 1;
   public static final int ITEM_TYPE_HR = 2;
 
+  long notebookId;
   @Expose
   @SerializedName("draftTitle")
   String draftTitle;
@@ -25,6 +26,14 @@ public class DraftModel {
   ArrayList<DraftDataItemModel> items;
 
   public DraftModel() {
+  }
+
+  public long getNotebookId() {
+    return notebookId;
+  }
+
+  public void setNotebookId(long notebookId) {
+    this.notebookId = notebookId;
   }
 
   public DraftModel(ArrayList<DraftDataItemModel> items) {

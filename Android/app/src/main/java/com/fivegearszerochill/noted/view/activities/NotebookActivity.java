@@ -87,6 +87,7 @@ public class NotebookActivity extends AppCompatActivity {
     private void handleFabInit() {
         binding.nFab.setOnClickListener(view -> {
             Intent intent = new Intent(NotebookActivity.this, CreateNoteActivity.class);
+            intent.putExtra("notebookId",this.notebookId);
             startActivity(intent);
         });
     }

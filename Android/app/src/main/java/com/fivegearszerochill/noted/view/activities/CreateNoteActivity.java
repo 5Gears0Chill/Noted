@@ -1,43 +1,51 @@
 package com.fivegearszerochill.noted.view.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import com.fivegearszerochill.noted.R;
 import com.fivegearszerochill.noted.databinding.ActivityCreateNoteBinding;
 import com.fivegearszerochill.noted.editor.EditorControlBar;
 import com.fivegearszerochill.noted.editor.datatypes.DraftDataItemModel;
 import com.fivegearszerochill.noted.editor.models.DraftModel;
 import com.fivegearszerochill.noted.editor.utils.FilePathUtils;
-import com.google.gson.Gson;
+import com.fivegearszerochill.noted.repository.OnNoteInsertedCall;
+import com.fivegearszerochill.noted.util.app.ModelHelper;
+import com.fivegearszerochill.noted.viewmodel.NoteViewModel;
+import com.fivegearszerochill.noted.viewmodel.factory.ViewModelParameterizedProvider;
 
 import java.util.ArrayList;
 
 import static com.fivegearszerochill.noted.editor.components.TextComponentItem.MODE_PLAIN;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.NORMAL;
 
-public class CreateNoteActivity extends AppCompatActivity implements EditorControlBar.EditorControlListener {
+public class CreateNoteActivity extends AppCompatActivity implements EditorControlBar.EditorControlListener, OnNoteInsertedCall {
     private final int REQUEST_IMAGE_SELECTOR = 110;
 
     private ActivityCreateNoteBinding binding;
+    private NoteViewModel viewModel;
+    private long notebookId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        init();
+        binding = ActivityCreateNoteBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        init();
         initEditor();
         initDraftHandler();
     }
@@ -56,17 +64,13 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
 
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_IMAGE_SELECTOR:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    openGallery();
-                } else {
-                    //do something like displaying a message that he didn`t allow the app to access gallery and you wont be able to let him select from gallery
-                    //Toast.makeText()"Permission not granted to access images.");
-                    Toast.makeText(this, "Permission not granted for image access", Toast.LENGTH_SHORT).show();
-                }
-                break;
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_IMAGE_SELECTOR) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openGallery();
+            } else {
+                Toast.makeText(this, "Permission not granted for image access", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -77,24 +81,51 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
 
     @Override
     public void onInsertLinkClicked() {
-        Toast.makeText(this, "I WAS Clicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Fake link", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void updateSuccess() {
+        Toast.makeText(this, "Note Saved", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(CreateNoteActivity.this, NotebookActivity.class));
+    }
+
+    @Override
+    public void updateFailure() {
+        Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
     }
 
     private void init() {
-        binding = ActivityCreateNoteBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        getIntentExtras();
+        viewModel = ViewModelParameterizedProvider
+                .ofActivity(this, getApplicationContext())
+                .get(NoteViewModel.class);
     }
+
     private void initDraftHandler() {
-        binding.cnFab.setOnClickListener(view -> getDraft());
+        binding.cnFab.setOnClickListener(view -> {
+            setNoteTitle();
+            setNotebookId();
+            viewModel.insertNote(ModelHelper.constructNote(binding.mdEditor.getDraft()), this);
+        });
+    }
+
+    private void setNotebookId() {
+        binding.mdEditor.getDraft().setNotebookId(this.notebookId);
+    }
+
+    private void setNoteTitle() {
+        String title = binding.cnTitleEditText.getText().toString();
+        binding.mdEditor.getDraft().setDraftTitle(title);
     }
 
     private void initEditor() {
         binding.controlBar.setEditorControlListener(this);
         binding.mdEditor.configureEditor(
-                "",//server url for image upload
-                "",              //serverToken
-                true,           // isDraft: set true when you are loading draft
-                "Type here...", //default hint of input box
+                "",
+                "",
+                true,
+                getString(R.string.type_here),
                 NORMAL
         );
         binding.mdEditor.loadDraft(getDraftContent());
@@ -103,8 +134,13 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
 
     private void openGallery() {
         try {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_IMAGE_SELECTOR);
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_IMAGE_SELECTOR);
             } else {
                 Intent intent = new Intent();
                 intent.setType("image/*");
@@ -124,16 +160,14 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
         ArrayList<DraftDataItemModel> contentTypes = new ArrayList<>();
         DraftDataItemModel text = new DraftDataItemModel();
         text.setItemType(DraftModel.ITEM_TYPE_TEXT);
-        text.setContent("Your note...");
+        text.setContent("");
         text.setMode(MODE_PLAIN);
         text.setStyle(NORMAL);
-
         return new DraftModel(contentTypes);
     }
 
-    private void getDraft() {
-        DraftModel dm = binding.mdEditor.getDraft();
-        String json = new Gson().toJson(dm);
-        Log.d("MarkDEditor", json);
+    private void getIntentExtras() {
+        Intent intent = getIntent();
+        this.notebookId = intent.getLongExtra("notebookId", 0);
     }
 }

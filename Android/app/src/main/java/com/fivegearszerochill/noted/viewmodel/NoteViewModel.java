@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.paging.PagedList;
 
 import com.fivegearszerochill.noted.repository.NoteRepository;
+import com.fivegearszerochill.noted.repository.OnNoteInsertedCall;
 import com.fivegearszerochill.noted.room.entity.NoteEntity;
 
 public class NoteViewModel extends AndroidViewModel {
@@ -20,5 +21,9 @@ public class NoteViewModel extends AndroidViewModel {
 
     public LiveData<PagedList<NoteEntity>> getPaginatedNotes(long notebookId) {
         return repository.getNotesAsync(notebookId);
+    }
+
+    public void insertNote(NoteEntity note, OnNoteInsertedCall insertedCall) {
+        repository.insertNewNoteAsync(note, insertedCall);
     }
 }

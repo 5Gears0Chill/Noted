@@ -20,7 +20,7 @@ public class NotebookViewModel extends AndroidViewModel {
     }
 
     public void insertNotebook(NotebookEntity notebook, @NonNull OnNotebookInsertedCall insertedCall) {
-        repository.insertNewNotebook(notebook, insertedCall);
+        repository.insertNewNotebookAsync(notebook, insertedCall);
     }
 
     public LiveData<PagedList<NotebookEntity>> getPaginatedNotebooks() {

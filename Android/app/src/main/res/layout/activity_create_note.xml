@@ -6,10 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".view.activities.CreateNoteActivity">
 
+    <EditText
+        android:id="@+id/cn_title_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:hint="@string/title"
+        android:importantForAutofill="no"
+        android:layout_margin="14dp"
+        android:background="@android:color/transparent"
+        android:inputType="text" />
+
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/controlBar"
+        android:layout_below="@id/cn_title_edit_text"
         android:background="#ffffff">
 
         <com.fivegearszerochill.noted.editor.MarkDEditor
@@ -30,8 +43,8 @@
         android:id="@+id/cn_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_above="@id/controlBar"
+        android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@android:drawable/ic_menu_save" />
