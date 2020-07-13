@@ -1,5 +1,7 @@
 package com.fivegearszerochill.noted.editor.models;
 
+import androidx.annotation.NonNull;
+
 public class ImageComponentModel extends BaseComponentModel {
   private String url;
   private String caption;
@@ -20,6 +22,7 @@ public class ImageComponentModel extends BaseComponentModel {
     this.caption = caption;
   }
 
+  @NonNull
   @Override
   public String toString() {
     return "ImageComponentModel{" +

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static com.fivegearszerochill.noted.editor.components.TextComponentItem.MODE_OL;
 import static com.fivegearszerochill.noted.editor.components.TextComponentItem.MODE_PLAIN;
 import static com.fivegearszerochill.noted.editor.components.TextComponentItem.MODE_UL;
-import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.BLOCKQUOTE;
+import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.BLOCK_QUOTE;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.H1;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.H2;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.H3;
@@ -70,7 +70,7 @@ public class RenderingUtils {
       case H3:
       case H4:
       case H5:
-      case BLOCKQUOTE:
+      case BLOCK_QUOTE:
         markDEditor.addTextComponent(getInsertIndex(), item.getContent());
         markDEditor.setHeading(item.getStyle());
         break;

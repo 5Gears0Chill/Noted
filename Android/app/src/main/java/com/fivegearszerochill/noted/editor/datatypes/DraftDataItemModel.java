@@ -1,5 +1,7 @@
 package com.fivegearszerochill.noted.editor.datatypes;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -74,6 +76,7 @@ public class DraftDataItemModel {
     this.caption = caption;
   }
 
+  @NonNull
   @Override
   public String toString() {
     return "DraftDataItemModel{" +

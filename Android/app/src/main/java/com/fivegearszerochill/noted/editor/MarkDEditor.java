@@ -30,7 +30,7 @@ import java.util.List;
 import static com.fivegearszerochill.noted.editor.components.TextComponentItem.MODE_OL;
 import static com.fivegearszerochill.noted.editor.components.TextComponentItem.MODE_PLAIN;
 import static com.fivegearszerochill.noted.editor.components.TextComponentItem.MODE_UL;
-import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.BLOCKQUOTE;
+import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.BLOCK_QUOTE;
 import static com.fivegearszerochill.noted.editor.utils.FontSize.NORMAL;
 
 public class MarkDEditor extends MarkDCore implements
@@ -339,7 +339,7 @@ public class MarkDEditor extends MarkDCore implements
     if (_activeView instanceof TextComponentItem) {
       ((TextComponentItem) _activeView).setMode(currentInputMode);
       ComponentTag componentTag = (ComponentTag) _activeView.getTag();
-      ((TextComponentModel) componentTag.getComponent()).setHeadingStyle(BLOCKQUOTE);
+      ((TextComponentModel) componentTag.getComponent()).setHeadingStyle(BLOCK_QUOTE);
       __textComponent.updateComponent(_activeView);
     }
     refreshViewOrder();

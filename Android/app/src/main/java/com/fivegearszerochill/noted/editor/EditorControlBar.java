@@ -17,7 +17,7 @@ import com.fivegearszerochill.noted.R;
 import static com.fivegearszerochill.noted.editor.components.TextComponentItem.MODE_OL;
 import static com.fivegearszerochill.noted.editor.components.TextComponentItem.MODE_PLAIN;
 import static com.fivegearszerochill.noted.editor.components.TextComponentItem.MODE_UL;
-import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.BLOCKQUOTE;
+import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.BLOCK_QUOTE;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.H1;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.H2;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.H3;
@@ -149,7 +149,7 @@ public class EditorControlBar extends FrameLayout implements MarkDEditor.EditorF
         } else {
           //blockquote
           mEditor.changeToBlockquote();
-          invalidateStates(MODE_PLAIN, BLOCKQUOTE);
+          invalidateStates(MODE_PLAIN, BLOCK_QUOTE);
         }
       }
     });
@@ -268,7 +268,7 @@ public class EditorControlBar extends FrameLayout implements MarkDEditor.EditorF
         enableHeading(true, 5);
         enableNormalText(false);
         enableBullet(false, false);
-      } else if (textComponentStyle == BLOCKQUOTE) {
+      } else if (textComponentStyle == BLOCK_QUOTE) {
         enableBlockquote(true);
         enableHeading(false, 1);
         enableNormalText(false);

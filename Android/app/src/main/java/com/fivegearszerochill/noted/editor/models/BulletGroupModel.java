@@ -1,5 +1,7 @@
 package com.fivegearszerochill.noted.editor.models;
 
+import androidx.annotation.NonNull;
+
 public class BulletGroupModel {
   private int orderType;
   private int startIndex;
@@ -29,6 +31,7 @@ public class BulletGroupModel {
     this.endIndex = endIndex;
   }
 
+  @NonNull
   @Override
   public String toString() {
     return "BulletGroupModel{" +

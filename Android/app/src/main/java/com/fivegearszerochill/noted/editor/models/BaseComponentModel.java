@@ -1,5 +1,7 @@
 package com.fivegearszerochill.noted.editor.models;
 
+import androidx.annotation.NonNull;
+
 public class BaseComponentModel {
   private String componentType;
   private int componentIndex;
@@ -12,6 +14,7 @@ public class BaseComponentModel {
     this.componentType = componentType;
   }
 
+  @NonNull
   @Override
   public String toString() {
     return "BaseComponentModel{" +

@@ -16,7 +16,7 @@ import com.fivegearszerochill.noted.editor.models.TextComponentModel;
 import com.fivegearszerochill.noted.editor.utils.FontSize;
 
 import static com.fivegearszerochill.noted.editor.components.TextComponentItem.MODE_PLAIN;
-import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.BLOCKQUOTE;
+import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.BLOCK_QUOTE;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.H1;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.H5;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.NORMAL;
@@ -172,7 +172,7 @@ public class TextComponent {
             ((TextComponentItem) view).getInputBox().setLineSpacing(2f,1.1f);
         }
 
-        if (style == BLOCKQUOTE) {
+        if (style == BLOCK_QUOTE) {
             ((TextComponentItem) view).getInputBox().setTypeface(null, Typeface.ITALIC);
             (((TextComponentItem) view).getInputBox()).setBackgroundResource(R.drawable.blockquote_component_bg);
             ((TextComponentItem) view).getInputBox().setPadding(

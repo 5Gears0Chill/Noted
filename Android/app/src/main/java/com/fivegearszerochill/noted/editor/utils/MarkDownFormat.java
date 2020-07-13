@@ -1,6 +1,6 @@
 package com.fivegearszerochill.noted.editor.utils;
 
-import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.BLOCKQUOTE;
+import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.BLOCK_QUOTE;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.H1;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.H2;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.H3;
@@ -27,7 +27,7 @@ public class MarkDownFormat {
       case H5:
         pref = "##### ";
         break;
-      case BLOCKQUOTE:
+      case BLOCK_QUOTE:
         pref = "> ";
         break;
       default:

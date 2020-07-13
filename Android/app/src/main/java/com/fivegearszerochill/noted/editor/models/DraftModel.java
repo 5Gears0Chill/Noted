@@ -1,5 +1,7 @@
 package com.fivegearszerochill.noted.editor.models;
 
+import androidx.annotation.NonNull;
+
 import com.fivegearszerochill.noted.editor.datatypes.DraftDataItemModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -53,6 +55,7 @@ public class DraftModel {
     this.items = items;
   }
 
+  @NonNull
   @Override
   public String toString() {
     return "DraftModel{" +

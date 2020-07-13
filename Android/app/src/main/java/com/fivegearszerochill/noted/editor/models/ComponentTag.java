@@ -1,5 +1,7 @@
 package com.fivegearszerochill.noted.editor.models;
 
+import androidx.annotation.NonNull;
+
 public class ComponentTag {
   private int componentIndex;
   private BaseComponentModel baseComponent;
@@ -20,6 +22,7 @@ public class ComponentTag {
     this.componentIndex = componentIndex;
   }
 
+  @NonNull
   @Override
   public String toString() {
     return "ComponentTag{" +

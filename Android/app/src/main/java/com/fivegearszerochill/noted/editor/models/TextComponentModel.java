@@ -1,6 +1,8 @@
 package com.fivegearszerochill.noted.editor.models;
 
 
+import androidx.annotation.NonNull;
+
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.NORMAL;
 
 public class TextComponentModel extends BaseComponentModel {
@@ -14,6 +16,7 @@ public class TextComponentModel extends BaseComponentModel {
     this.headingStyle = headingStyle;
   }
 
+  @NonNull
   @Override
   public String toString() {
     return "TextComponentModel{" +

@@ -7,5 +7,5 @@ public class TextComponentStyle {
   public static final int H3 = 3;
   public static final int H4 = 4;
   public static final int H5 = 5;
-  public static final int BLOCKQUOTE = 6;
+  public static final int BLOCK_QUOTE = 6;
 }
