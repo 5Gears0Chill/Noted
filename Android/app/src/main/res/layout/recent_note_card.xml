@@ -75,6 +75,14 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_l"
                 android:text="@string/edit" />
+            <Button
+                android:id="@+id/n_view_btn"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_l"
+                android:text="@string/view" />
         </LinearLayout>
 
     </LinearLayout>

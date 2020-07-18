@@ -7,12 +7,19 @@
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
     android:elevation="20dp">
-
+    <ImageView
+        android:id="@+id/nc_close_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="8dp"
+        android:layout_gravity="end"
+        android:visibility="gone"
+        android:src="@drawable/ic_close"
+        android:contentDescription="@string/delete_card" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <!-- Media -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,6 +73,14 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_l"
                 android:text="@string/edit" />
+            <Button
+                android:id="@+id/n_view_btn"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_l"
+                android:text="@string/view" />
         </LinearLayout>
 
     </LinearLayout>
