@@ -36,7 +36,7 @@ public class NotebookFeedViewHolder extends RecyclerView.ViewHolder {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
                     binding.ncCloseButton.setVisibility(View.VISIBLE);
-                    listener.onNoteLongPressed(view, position);
+                    listener.onNoteLongPressed(view, position, binding);
                 }
             }
             return true;

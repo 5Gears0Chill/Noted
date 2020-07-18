@@ -7,12 +7,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fivegearszerochill.noted.R;
 import com.fivegearszerochill.noted.databinding.ActivityHomeBinding;
+import com.fivegearszerochill.noted.databinding.NotebookCardBinding;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
 import com.fivegearszerochill.noted.view.adapters.NotebookFeed;
 import com.fivegearszerochill.noted.view.adapters.SectionsPagerAdapter;
@@ -77,9 +79,20 @@ public class HomeActivity extends AppCompatActivity {
     private void handleNotebookCardListeners() {
         adapter.setListener(new OnNotebookItemClickListener() {
             @Override
-            public void onNoteLongPressed(View view, int position) {
+            public void onNoteLongPressed(View view, int position, NotebookCardBinding binding) {
                 Animation animation = AnimationUtils.loadAnimation(view.getContext(), R.anim.shake);
                 view.startAnimation(animation);
+                /*
+                  When Back is pressed, undo delete animations
+                 */
+                OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        view.clearAnimation();
+                        binding.ncCloseButton.setVisibility(View.GONE);
+                    }
+                };
+                getOnBackPressedDispatcher().addCallback(callback);
             }
 
             @Override
