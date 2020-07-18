@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fivegearszerochill.noted.databinding.RecentNoteCardBinding;
+import com.fivegearszerochill.noted.editor.models.DraftModel;
 import com.fivegearszerochill.noted.room.entity.queryable.NoteAndNotebook;
+import com.fivegearszerochill.noted.util.general.DateHelper;
+import com.fivegearszerochill.noted.util.general.StringHelper;
 
 public class RecentNotesFeedViewHolder extends RecyclerView.ViewHolder {
 
@@ -17,9 +20,10 @@ public class RecentNotesFeedViewHolder extends RecyclerView.ViewHolder {
 
 
     public void bindTo(NoteAndNotebook entity){
-        binding.rncTitle.setText(entity.getNote().getTitle());
-       if(entity.getNotebook() != null){
-           binding.rncNotebook.setText(entity.getNotebook().getTitle());
-       }
+        binding.nTitle.setText(entity.getNote().getTitle());
+        binding.nDate.setText(DateHelper.convertDateToString(entity.getNote().getUpdatedOn()));
+        DraftModel model = StringHelper.parseJsonString(entity.getNote().getContent());
+        binding.nDescription.setText(model.getItems().get(0).getContent());
+        binding.nNotebook.setText(entity.getNotebook().getTitle());
     }
 }

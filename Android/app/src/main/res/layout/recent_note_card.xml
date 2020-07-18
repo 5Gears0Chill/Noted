@@ -1,38 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_view"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
-    android:layout_gravity="center"
-    android:layout_margin="20dp"
-    android:backgroundTint="@color/grey_custom_light"
-    android:elevation="6dp"
-    card_view:cardCornerRadius="40dp">
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:elevation="20dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/rnc_notebook"
+        <!-- Media -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Title, secondary and supporting text -->
+            <TextView
+                android:id="@+id/n_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_xl"
+                android:text="@string/sample_notebook_title"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <TextView
+                android:id="@+id/n_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="@dimen/text_l"
+                android:text="@string/some_text_about_what_this_card_is_about"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:attr/textColorSecondary" />
+
+            <TextView
+                android:id="@+id/n_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="@dimen/text_n"
+                android:text="@string/_20_june_2020"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:attr/textColorSecondary" />
+            <TextView
+                android:id="@+id/n_notebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="@dimen/text_n"
+                android:text="@string/my_notebook"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:attr/textColorSecondary" />
+
+        </LinearLayout>
+
+        <!-- Buttons -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="0dp"
-            android:textSize="@dimen/text_s" />
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/rnc_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rnc_notebook"
-            android:layout_centerInParent="true"
-            android:layout_margin="20dp"
-            android:text="@string/title_activity_home"
-            android:textSize="@dimen/text_l" />
-    </RelativeLayout>
+            <Button
+                android:id="@+id/n_edit_btn"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_l"
+                android:text="@string/edit" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 </androidx.cardview.widget.CardView>
