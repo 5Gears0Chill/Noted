@@ -82,9 +82,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onNoteLongPressed(View view, int position, NotebookCardBinding binding) {
                 Animation animation = AnimationUtils.loadAnimation(view.getContext(), R.anim.shake);
                 view.startAnimation(animation);
-                /*
-                  When Back is pressed, undo delete animations
-                 */
                 OnBackPressedCallback callback = new OnBackPressedCallback(true) {
                     @Override
                     public void handleOnBackPressed() {
@@ -112,8 +109,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void sendToNotebookActivity(long id) {
-        Intent intent = new Intent(HomeActivity.this,NotebookActivity.class);
-        intent.putExtra("notebookId",id);
+        Intent intent = new Intent(HomeActivity.this, NotebookActivity.class);
+        intent.putExtra("notebookId", id);
         startActivity(intent);
     }
 
@@ -123,9 +120,12 @@ public class HomeActivity extends AppCompatActivity {
                 .setMessage("This cannot be undone. " +
                         "Are you sure you would like to delete " +
                         adapter.getItemByPosition(position).getTitle() + "?")
-                .setNeutralButton("CANCEL", (dialogInterface, i) -> Toast.makeText(HomeActivity.this, "CANCELLED", Toast.LENGTH_SHORT).show()).setPositiveButton("DELETE", (dialogInterface, i) -> {
-            viewModel.deleteNotebook(adapter.getItemByPosition(position));
-            Toast.makeText(HomeActivity.this, "Deleted " + adapter.getItemByPosition(position).getTitle(), Toast.LENGTH_SHORT).show();
-        }).show();
+                .setNeutralButton("CANCEL", (dialogInterface, i) ->
+                        Toast.makeText(HomeActivity.this, "CANCELLED", Toast.LENGTH_SHORT)
+                                .show())
+                .setPositiveButton("DELETE", (dialogInterface, i) -> {
+                    viewModel.deleteNotebook(adapter.getItemByPosition(position));
+                    Toast.makeText(HomeActivity.this, "Deleted " + adapter.getItemByPosition(position).getTitle(), Toast.LENGTH_SHORT).show();
+                }).show();
     }
 }
