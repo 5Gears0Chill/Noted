@@ -46,7 +46,6 @@ public class MarkDEditor extends MarkDCore implements
     private int currentInputMode;
     private MarkDownConverter markDownConverter;
     private String serverToken;
-    private RenderingUtils renderingUtils;
     private EditorFocusReporter editorFocusReporter;
     private String startHintText;
     private int defaultHeadingType = NORMAL;
@@ -182,7 +181,7 @@ public class MarkDEditor extends MarkDCore implements
         oldDraft.setNotebookId(id);
     }
     /**
-     * method to send callback for focussed view back to subscriber(if any).
+     * method to send callback for focused view back to subscriber(if any).
      *
      * @param view newly focus view.
      */
@@ -197,7 +196,7 @@ public class MarkDEditor extends MarkDCore implements
         ArrayList<DraftDataItemModel> contents = draft.getItems();
         if (contents != null) {
             if (contents.size() > 0) {
-                renderingUtils = new RenderingUtils();
+                RenderingUtils renderingUtils = new RenderingUtils();
                 renderingUtils.setEditor(this);
                 renderingUtils.render(contents);
             } else {

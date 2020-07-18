@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NavUtils;
 
 import com.fivegearszerochill.noted.R;
 import com.fivegearszerochill.noted.databinding.ActivityCreateNoteBinding;
@@ -40,6 +44,8 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
         super.onCreate(savedInstanceState);
         binding = ActivityCreateNoteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        initOnBackPressedCallback();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -62,6 +68,20 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = NavUtils.getParentActivityIntent(this);
+                assert intent != null;
+                intent.putExtra("notebookId",notebookId);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                NavUtils.navigateUpTo(this, intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -134,6 +154,8 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
         binding.controlBar.setEditor(binding.mdEditor);
     }
 
+
+
     private void openGallery() {
         try {
             if (ActivityCompat.checkSelfPermission(
@@ -172,4 +194,17 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
         Intent intent = getIntent();
         this.notebookId = intent.getLongExtra("notebookId", 0);
     }
+
+    private static final String TAG = "CreateNoteActivity";
+    private void initOnBackPressedCallback() {
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Toast.makeText(CreateNoteActivity.this, "On Back Pressed Callback was clicked", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "handleOnBackPressed: was called");
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
+    }
+
 }
