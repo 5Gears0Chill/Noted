@@ -15,7 +15,7 @@ public class NoteAndNotebook {
 
 
     @Relation(
-            parentColumn = "note_id",
+            parentColumn = "notebook_id",
             entityColumn = "notebook_id"
     )
     private NotebookEntity notebook;

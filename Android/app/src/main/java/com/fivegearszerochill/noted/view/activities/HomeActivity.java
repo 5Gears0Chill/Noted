@@ -125,7 +125,9 @@ public class HomeActivity extends AppCompatActivity {
                                 .show())
                 .setPositiveButton("DELETE", (dialogInterface, i) -> {
                     viewModel.deleteNotebook(adapter.getItemByPosition(position));
-                    Toast.makeText(HomeActivity.this, "Deleted " + adapter.getItemByPosition(position).getTitle(), Toast.LENGTH_SHORT).show();
-                }).show();
+                    Toast.makeText(HomeActivity.this, "Deleted " + adapter.getItemByPosition(position).getTitle(), Toast.LENGTH_SHORT)
+                            .show();
+                })
+                .show();
     }
 }
