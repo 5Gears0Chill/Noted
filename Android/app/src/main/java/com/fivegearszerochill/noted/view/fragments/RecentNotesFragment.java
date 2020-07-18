@@ -56,9 +56,9 @@ public class RecentNotesFragment extends Fragment {
                 .ofFragment(this, getActivity().getApplicationContext())
                 .get(RecentNotesViewModel.class);
 
-        viewModel.getRecentNotesPaged().observe(this, noteAndAttributesAndNotebooks -> {
-            if (noteAndAttributesAndNotebooks != null) {
-                adapter.submitList(noteAndAttributesAndNotebooks);
+        viewModel.getRecentNotesPaged().observe(this, noteAndNotebooks -> {
+            if (noteAndNotebooks != null) {
+                adapter.submitList(noteAndNotebooks);
             }
         });
     }

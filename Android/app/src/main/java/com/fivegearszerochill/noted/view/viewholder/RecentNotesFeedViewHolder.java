@@ -18,6 +18,8 @@ public class RecentNotesFeedViewHolder extends RecyclerView.ViewHolder {
 
     public void bindTo(NoteAndNotebook entity){
         binding.rncTitle.setText(entity.getNote().getTitle());
-        binding.rncNotebook.setText(entity.getNotebook().getTitle());
+       if(entity.getNotebook() != null){
+           binding.rncNotebook.setText(entity.getNotebook().getTitle());
+       }
     }
 }
