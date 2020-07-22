@@ -55,6 +55,11 @@ public class NotebookRepository {
 
     public void deleteNotebook(NotebookEntity notebook) {
         taskRunner.executeAsync(new BackgroundDeleteTask(notebookDao, notebook), (data) -> {
+            if (data) {
+                //notify deleted
+            } else {
+                //notify failure
+            }
         });
     }
 

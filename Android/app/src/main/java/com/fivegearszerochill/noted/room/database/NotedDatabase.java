@@ -33,7 +33,7 @@ import com.fivegearszerochill.noted.room.entity.TagEntity;
 }, version = NotedDatabase.VERSION)
 @TypeConverters({Converters.class})
 public abstract class NotedDatabase extends RoomDatabase {
-    public static final int VERSION = 5;
+    public static final int VERSION = 6;
 
     private static NotedDatabase instance;
 

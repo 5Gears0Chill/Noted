@@ -15,9 +15,11 @@ import com.fivegearszerochill.noted.room.entity.queryable.NoteAndNotebook;
 import java.util.Date;
 
 @Entity(tableName = "note",
-        foreignKeys = @ForeignKey(entity = NotebookEntity.class,
+        foreignKeys = @ForeignKey(
+                entity = NotebookEntity.class,
                 parentColumns = "notebook_id",
-                childColumns = "notebook_id"),
+                childColumns = "notebook_id",
+                onDelete = ForeignKey.CASCADE),
         indices = {@Index(value = "notebook_id")})
 public class NoteEntity implements CoreEntity {
 

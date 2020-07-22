@@ -5,7 +5,7 @@ import com.fivegearszerochill.noted.room.entity.CoreEntity;
 
 import java.util.concurrent.Callable;
 
-public class BackgroundDeleteTask implements Callable<Void> {
+public class BackgroundDeleteTask implements Callable<Boolean> {
     private final CoreDao dao;
     private final CoreEntity entity;
 
@@ -15,8 +15,12 @@ public class BackgroundDeleteTask implements Callable<Void> {
     }
 
     @Override
-    public Void call() {
-        dao.deleteAsync(entity);
-        return null;
+    public Boolean call() {
+        try{
+            dao.deleteAsync(entity);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }
