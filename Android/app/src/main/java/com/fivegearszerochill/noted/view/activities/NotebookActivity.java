@@ -1,19 +1,28 @@
 package com.fivegearszerochill.noted.view.activities;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
+import com.fivegearszerochill.noted.R;
 import com.fivegearszerochill.noted.databinding.ActivityNotebookBinding;
+import com.fivegearszerochill.noted.databinding.NoteCardBinding;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
 import com.fivegearszerochill.noted.view.adapters.NoteFeed;
+import com.fivegearszerochill.noted.view.interfaces.OnNoteClickedListener;
 import com.fivegearszerochill.noted.viewmodel.NoteViewModel;
 import com.fivegearszerochill.noted.viewmodel.NotebookViewModel;
 import com.fivegearszerochill.noted.viewmodel.factory.ViewModelParameterizedProvider;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class NotebookActivity extends AppCompatActivity {
 
@@ -22,6 +31,9 @@ public class NotebookActivity extends AppCompatActivity {
     private NoteViewModel noteViewModel;
     private NotebookViewModel notebookViewModel;
     private NoteFeed adapter;
+
+    /*FLAGS*/
+    private boolean ANIMATION_STATE = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +46,7 @@ public class NotebookActivity extends AppCompatActivity {
         super.onStart();
         handleInitialNoteLoading();
         handleFabInit();
+        handleNoteFeedListeners();
     }
 
     private void init() {
@@ -90,5 +103,74 @@ public class NotebookActivity extends AppCompatActivity {
             intent.putExtra("notebookId",this.notebookId);
             startActivity(intent);
         });
+    }
+
+    private void handleNoteFeedListeners(){
+        adapter.setListener(new OnNoteClickedListener() {
+            @Override
+            public void onEditButtonClicked(View view, int position) {
+
+            }
+
+            @Override
+            public void onViewButtonClicked(View view, int position) {
+
+            }
+
+            @Override
+            public void onNoteLongPressed(View view, int position, NoteCardBinding binding) {
+                Animation animation = AnimationUtils.loadAnimation(view.getContext(), R.anim.shake_minor);
+                view.startAnimation(animation);
+                ANIMATION_STATE = true;
+                OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        view.clearAnimation();
+                        binding.ncCloseButton.setVisibility(View.GONE);
+                    }
+                };
+                getOnBackPressedDispatcher().addCallback(callback);
+            }
+
+            @Override
+            public void onNoteClicked(View view, int position) {
+
+            }
+
+            @Override
+            public void onDeleteButtonClicked(View view, int position) {
+                view.clearAnimation();
+                createDeleteConfirmationPopup(view, position);
+            }
+        });
+    }
+
+    private void createDeleteConfirmationPopup(View view, int position) {
+        new MaterialAlertDialogBuilder(view.getRootView().getContext())
+                .setTitle("Delete " + adapter.getItemByPosition(position).getTitle() + "?")
+                .setMessage("This cannot be undone. " +
+                        "Are you sure you would like to delete " +
+                        adapter.getItemByPosition(position).getTitle() + "?")
+                .setNeutralButton("CANCEL", (dialogInterface, i) ->
+                        Toast.makeText(NotebookActivity.this, "CANCELLED", Toast.LENGTH_SHORT)
+                                .show())
+                .setPositiveButton("DELETE", (dialogInterface, i) -> {
+//                    noteViewModel.deleteNote(adapter.getItemByPosition(position));
+                    Toast.makeText(NotebookActivity.this, "Deleted " + adapter.getItemByPosition(position).getTitle(), Toast.LENGTH_SHORT)
+                            .show();
+                })
+                .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+       if(!ANIMATION_STATE){
+           Intent intent = NavUtils.getParentActivityIntent(this);
+           assert intent != null;
+           intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+           NavUtils.navigateUpTo(this, intent);
+       }
+       ANIMATION_STATE = false;
     }
 }

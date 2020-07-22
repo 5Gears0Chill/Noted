@@ -72,7 +72,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private void handleFabOnClickEvent() {
         binding.fab.setOnClickListener(view -> {
-            startActivity(new Intent(this, CreateNotebookActivity.class));
+            Intent intent = new Intent(this, CreateNotebookActivity.class);
+            startActivity(intent);
         });
     }
 

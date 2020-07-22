@@ -1,16 +1,15 @@
 package com.fivegearszerochill.noted.view.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.fivegearszerochill.noted.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
+
 import com.fivegearszerochill.noted.databinding.ActivityCreateNotebookBinding;
-import com.fivegearszerochill.noted.databinding.ActivityHomeBinding;
-import com.fivegearszerochill.noted.exception.ExceptionMiddleware;
 import com.fivegearszerochill.noted.repository.OnNotebookInsertedCall;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
 import com.fivegearszerochill.noted.view.steps.NoteCardColorSelectionStep;
@@ -20,7 +19,6 @@ import com.fivegearszerochill.noted.viewmodel.NotebookViewModel;
 import com.fivegearszerochill.noted.viewmodel.factory.ViewModelParameterizedProvider;
 import com.google.android.material.snackbar.Snackbar;
 
-import ernestoyaquello.com.verticalstepperform.VerticalStepperFormView;
 import ernestoyaquello.com.verticalstepperform.listener.StepperFormListener;
 
 public class CreateNotebookActivity extends AppCompatActivity implements StepperFormListener, OnNotebookInsertedCall {
@@ -34,10 +32,10 @@ public class CreateNotebookActivity extends AppCompatActivity implements Stepper
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionMiddleware(this));
 
         binding = ActivityCreateNotebookBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -68,8 +66,9 @@ public class CreateNotebookActivity extends AppCompatActivity implements Stepper
                 Snackbar.LENGTH_LONG)
                 .setAction(
                         "OK",
-                        view -> startActivity(new Intent(CreateNotebookActivity.this, HomeActivity.class)))
+                        view -> handleNavigationStack())
                 .show();
+        handleNavigationStack();
     }
 
     @Override
@@ -82,6 +81,18 @@ public class CreateNotebookActivity extends AppCompatActivity implements Stepper
                         "RESUBMIT",
                         view -> this.onCompletedForm())
                 .show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = NavUtils.getParentActivityIntent(this);
+            assert intent != null;
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            NavUtils.navigateUpTo(this, intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initVerticalStepper() {
@@ -107,4 +118,9 @@ public class CreateNotebookActivity extends AppCompatActivity implements Stepper
     }
 
 
+    private void handleNavigationStack(){
+        Intent intent = new Intent(CreateNotebookActivity.this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
 }

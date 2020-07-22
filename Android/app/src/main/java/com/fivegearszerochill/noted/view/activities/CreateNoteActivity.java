@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -26,9 +27,11 @@ import com.fivegearszerochill.noted.repository.OnNoteInsertedCall;
 import com.fivegearszerochill.noted.util.app.ModelHelper;
 import com.fivegearszerochill.noted.viewmodel.NoteViewModel;
 import com.fivegearszerochill.noted.viewmodel.factory.ViewModelParameterizedProvider;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
+import static android.view.KeyEvent.KEYCODE_BACK;
 import static com.fivegearszerochill.noted.editor.components.TextComponentItem.MODE_PLAIN;
 import static com.fivegearszerochill.noted.editor.styles.TextComponentStyle.NORMAL;
 
@@ -70,17 +73,15 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent = NavUtils.getParentActivityIntent(this);
-                assert intent != null;
-                intent.putExtra("notebookId",notebookId);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                NavUtils.navigateUpTo(this, intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = NavUtils.getParentActivityIntent(this);
+            assert intent != null;
+            intent.putExtra("notebookId", notebookId);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            NavUtils.navigateUpTo(this, intent);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -155,7 +156,6 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
     }
 
 
-
     private void openGallery() {
         try {
             if (ActivityCompat.checkSelfPermission(
@@ -196,6 +196,7 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
     }
 
     private static final String TAG = "CreateNoteActivity";
+
     private void initOnBackPressedCallback() {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
@@ -207,4 +208,23 @@ public class CreateNoteActivity extends AppCompatActivity implements EditorContr
         getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        if (keyCode == KEYCODE_BACK && event.isLongPress()) {
+            Snackbar.make(binding.getRoot(),
+                    "Disabled to stop you from leaving your work. click the back arrow!",
+                    Snackbar.LENGTH_LONG)
+                    .setAction(
+                            "OK",
+                            view -> {
+                            })
+                    .show();
+        }
+        return super.onKeyLongPress(keyCode, event);
+    }
 }

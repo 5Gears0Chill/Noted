@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fivegearszerochill.noted.databinding.FragmentRecentNotesBinding;
-import com.fivegearszerochill.noted.exception.ExceptionMiddleware;
 import com.fivegearszerochill.noted.view.adapters.RecentNotesFeed;
 import com.fivegearszerochill.noted.viewmodel.RecentNotesViewModel;
 import com.fivegearszerochill.noted.viewmodel.factory.ViewModelParameterizedProvider;
@@ -43,7 +42,6 @@ public class RecentNotesFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionMiddleware(getActivity()));
 
         return binding.getRoot();
     }

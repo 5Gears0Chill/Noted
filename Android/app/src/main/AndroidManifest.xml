@@ -19,7 +19,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fivegearszerochill.noted.view.activities.NotebookActivity" />
         </activity>
-        <activity android:name=".view.activities.NotebookActivity" />
+        <activity android:name=".view.activities.NotebookActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fivegearszerochill.noted.view.activities.HomeActivity" />
+        </activity>
         <activity
             android:name=".view.activities.HomeActivity"
             android:label="@string/title_activity_home"
@@ -30,8 +34,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activities.CreateNotebookActivity"/>
-        <activity android:name=".view.activities.CrashActivity" />
+        <activity android:name=".view.activities.CreateNotebookActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fivegearszerochill.noted.view.activities.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
