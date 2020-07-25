@@ -21,6 +21,7 @@ import com.fivegearszerochill.noted.databinding.ActivityHomeBinding;
 import com.fivegearszerochill.noted.databinding.NotebookCardBinding;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
 import com.fivegearszerochill.noted.unsplash.models.Photo;
+import com.fivegearszerochill.noted.unsplash.requests.UnsplashSearchRequest;
 import com.fivegearszerochill.noted.view.adapters.NotebookFeed;
 import com.fivegearszerochill.noted.view.adapters.SectionsPagerAdapter;
 import com.fivegearszerochill.noted.view.interfaces.OnNotebookItemClickListener;
@@ -30,6 +31,7 @@ import com.fivegearszerochill.noted.viewmodel.factory.ViewModelParameterizedProv
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.List;
+import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -55,12 +57,33 @@ public class HomeActivity extends AppCompatActivity {
         handleFabOnClickEvent();
         handleNotebookCardListeners();
 
+//        unsplashViewModel = new ViewModelProvider(this).get(UnsplashViewModel.class);
+//        unsplashViewModel.init();
+//        unsplashViewModel.getPhotos().observe(this, photos -> {
+//            if(photos!=null){
+//                for (Photo p :
+//                        photos) {
+//                    Log.d(TAG, p.toString());
+//                }
+//            }
+//        });
+
+        UnsplashSearchRequest request = new UnsplashSearchRequest.Builder("socks")
+                .setColor("black_and_white")
+                .setContentFilter("low")
+                .setOrderBy("relevant")
+                .setOrientation("landscape")
+                .setPage(1)
+                .setPerPage(20)
+                .build();
+        Map<String, Object> map = request.toMap();
+        Log.d(TAG, String.valueOf(map));
         unsplashViewModel = new ViewModelProvider(this).get(UnsplashViewModel.class);
         unsplashViewModel.init();
-        unsplashViewModel.getPhotos().observe(this, photos -> {
-            if(photos!=null){
+        unsplashViewModel.getPhotos(request.toMap()).observe(this, photos -> {
+            if (photos != null) {
                 for (Photo p :
-                        photos) {
+                        photos.getResults()) {
                     Log.d(TAG, p.toString());
                 }
             }
