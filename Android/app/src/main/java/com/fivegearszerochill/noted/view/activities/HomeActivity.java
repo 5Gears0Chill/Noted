@@ -2,6 +2,7 @@ package com.fivegearszerochill.noted.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -9,6 +10,9 @@ import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,18 +20,27 @@ import com.fivegearszerochill.noted.R;
 import com.fivegearszerochill.noted.databinding.ActivityHomeBinding;
 import com.fivegearszerochill.noted.databinding.NotebookCardBinding;
 import com.fivegearszerochill.noted.room.entity.NotebookEntity;
+import com.fivegearszerochill.noted.unsplash.models.Photo;
 import com.fivegearszerochill.noted.view.adapters.NotebookFeed;
 import com.fivegearszerochill.noted.view.adapters.SectionsPagerAdapter;
 import com.fivegearszerochill.noted.view.interfaces.OnNotebookItemClickListener;
 import com.fivegearszerochill.noted.viewmodel.NotebookViewModel;
+import com.fivegearszerochill.noted.viewmodel.UnsplashViewModel;
 import com.fivegearszerochill.noted.viewmodel.factory.ViewModelParameterizedProvider;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
     private NotebookViewModel viewModel;
     private ActivityHomeBinding binding;
     private NotebookFeed adapter;
+
+
+    //Testing
+    private UnsplashViewModel unsplashViewModel;
+    private static final String TAG = "HomeActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +54,17 @@ public class HomeActivity extends AppCompatActivity {
         handleInitialNotebookLoading();
         handleFabOnClickEvent();
         handleNotebookCardListeners();
+
+        unsplashViewModel = new ViewModelProvider(this).get(UnsplashViewModel.class);
+        unsplashViewModel.init();
+        unsplashViewModel.getPhotos().observe(this, photos -> {
+            if(photos!=null){
+                for (Photo p :
+                        photos) {
+                    Log.d(TAG, p.toString());
+                }
+            }
+        });
     }
 
     private void init() {
