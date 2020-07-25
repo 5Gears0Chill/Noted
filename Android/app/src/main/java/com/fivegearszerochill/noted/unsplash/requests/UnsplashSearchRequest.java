@@ -1,6 +1,7 @@
 package com.fivegearszerochill.noted.unsplash.requests;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.annotations.SerializedName;
@@ -8,19 +9,19 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 
 public class UnsplashSearchRequest {
-    @SerializedName("query")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String query;
-    @SerializedName("page")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private int page;
-    @SerializedName("per_page")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private int per_page;
-    @SerializedName("order_by")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String order_by;
-    @SerializedName("content_filter")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String content_filter;
-    @SerializedName("color")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String color;
-    @SerializedName("orientation")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String orientation;
 
     public static class Builder {

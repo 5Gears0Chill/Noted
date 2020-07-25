@@ -69,10 +69,6 @@ public class HomeActivity extends AppCompatActivity {
 //        });
 
         UnsplashSearchRequest request = new UnsplashSearchRequest.Builder("socks")
-                .setColor("black_and_white")
-                .setContentFilter("low")
-                .setOrderBy("relevant")
-                .setOrientation("landscape")
                 .setPage(1)
                 .setPerPage(20)
                 .build();
