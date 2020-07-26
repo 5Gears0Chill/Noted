@@ -231,7 +231,11 @@
     <string name="some_text_about_what_this_card_is_about">Some Text about what this card is about</string>
     <string name="_20_june_2020">20 June 2020</string>
     <string name="edit">EDIT</string>
+    <string name="customise">Customise</string>
     <string name="my_notebook">my notebook</string>
     <string name="view">VIEW</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_new_note">Create New Note</string>
 
 </resources>

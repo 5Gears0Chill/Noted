@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
     //Testing
-    private UnsplashViewModel unsplashViewModel;
     private static final String TAG = "HomeActivity";
 
     @Override
@@ -56,34 +55,6 @@ public class HomeActivity extends AppCompatActivity {
         handleInitialNotebookLoading();
         handleFabOnClickEvent();
         handleNotebookCardListeners();
-
-//        unsplashViewModel = new ViewModelProvider(this).get(UnsplashViewModel.class);
-//        unsplashViewModel.init();
-//        unsplashViewModel.getPhotos().observe(this, photos -> {
-//            if(photos!=null){
-//                for (Photo p :
-//                        photos) {
-//                    Log.d(TAG, p.toString());
-//                }
-//            }
-//        });
-
-        UnsplashSearchRequest request = new UnsplashSearchRequest.Builder("socks")
-                .setPage(1)
-                .setPerPage(20)
-                .build();
-        Map<String, Object> map = request.toMap();
-        Log.d(TAG, String.valueOf(map));
-        unsplashViewModel = new ViewModelProvider(this).get(UnsplashViewModel.class);
-        unsplashViewModel.init();
-        unsplashViewModel.getPhotos(request.toMap()).observe(this, photos -> {
-            if (photos != null) {
-                for (Photo p :
-                        photos.getResults()) {
-                    Log.d(TAG, p.toString());
-                }
-            }
-        });
     }
 
     private void init() {

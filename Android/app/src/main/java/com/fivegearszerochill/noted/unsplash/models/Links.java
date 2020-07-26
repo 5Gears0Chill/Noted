@@ -35,4 +35,20 @@ public class Links {
     public void setDownloadLocation(String downloadLocation) {
         this.downloadLocation = downloadLocation;
     }
+
+    public String getSelf() {
+        return self;
+    }
+
+    public String getHtml() {
+        return html;
+    }
+
+    public String getDownload() {
+        return download;
+    }
+
+    public String getDownloadLocation() {
+        return downloadLocation;
+    }
 }
